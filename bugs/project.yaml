@@ -1,0 +1,16 @@
+--- !ditz.rubyforge.org,2008-03-06/project 
+name: jenkins-ditz-plugin
+version: "0.5"
+components: 
+- !ditz.rubyforge.org,2008-03-06/component 
+  name: jenkins-ditz-plugin
+releases: 
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: 0.1.0
+  status: :unreleased
+  release_time: 
+  log_events: 
+  - - 2011-04-24 21:47:14.662125 Z
+    - Karolis Petrauskas <k.petrauskas@gmail.com>
+    - created
+    - ""

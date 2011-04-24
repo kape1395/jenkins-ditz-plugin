@@ -1,0 +1,15 @@
+
+Ditz plugin for Jenkins CI
+==========================
+
+Plans
+-----
+* This plugin should show ditz bugs in a project page.
+* Show trend graphs...
+
+
+Related things
+==============
+http://ditz.rubyforge.org/
+http://jenkins-ci.org/
+
