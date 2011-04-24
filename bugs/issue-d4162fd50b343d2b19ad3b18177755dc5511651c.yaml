@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Create configuration parameter for bugs directory.
+desc: |-
+  File .ditz-config should not be commited to SCM, so we will need to handle
+  ditz operations without such file, or with generated one.
+type: :task
+component: jenkins-ditz-plugin
+release: 0.1.0
+reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
+status: :unstarted
+disposition: 
+creation_time: 2011-04-24 22:01:39.074117 Z
+references: []
+
+id: d4162fd50b343d2b19ad3b18177755dc5511651c
+log_events: 
+- - 2011-04-24 22:01:41.542069 Z
+  - Karolis Petrauskas <k.petrauskas@gmail.com>
+  - created
+  - ""
