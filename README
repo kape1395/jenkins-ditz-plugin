@@ -13,3 +13,14 @@ Related things
 http://ditz.rubyforge.org/
 http://jenkins-ci.org/
 
+
+Some commands for development
+=============================
+
+According to https://wiki.jenkins-ci.org/display/JENKINS/Plugin+tutorial,
+ * Created:   mvn -cpu hpi:create
+ * Eclipsize: mvn -DdownloadSources=true -DdownloadJavadocs=true -DoutputDirectory=target/eclipse-classes eclipse:eclipse
+ * Debug:     env MAVEN_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=8000,suspend=n" mvn hpi:run
+
+
+
