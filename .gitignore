@@ -1,2 +1,6 @@
 .ditz-config
+.classpath
+.project
+.settings
 target
+work
