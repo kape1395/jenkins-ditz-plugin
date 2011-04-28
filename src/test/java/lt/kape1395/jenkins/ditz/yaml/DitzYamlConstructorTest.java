@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 
 import lt.kape1395.jenkins.ditz.model.Issue;
+import lt.kape1395.jenkins.ditz.model.Project;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -28,6 +29,9 @@ public class DitzYamlConstructorTest {
 	}
 
 	/* ***********************************************************************/
+	/**
+	 *  Test if issue is parsed correctly.
+	 */
 	@SuppressWarnings("unchecked")
 	@Test
 	public void testConstructIssue() throws Exception {
@@ -67,8 +71,42 @@ public class DitzYamlConstructorTest {
 		assertThat(issue.getTypeName(), is(":task"));
 		assertThat(issue.getStatusName(), is(":unstarted"));
 		assertThat(issue.getReleaseName(), is("1.0.0"));
-		
-		System.out.println("testParse: end");
 	}
 
+	/* ***********************************************************************/
+	/**
+	 *  Test if project is parsed correctly.
+	 */
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testConstructProject() throws Exception {
+		DitzComponentConstruct componentConstruct = new DitzComponentConstruct();
+		DitzReleaseConstruct releaseConstruct = new DitzReleaseConstruct();
+		DitzProjectConstruct projectConstruct = new DitzProjectConstruct(componentConstruct, releaseConstruct);
+		construct.addConstruct(DitzProjectConstruct.YAML_CLASS, projectConstruct);
+		
+		File inFile = new File("src/test/resources/bugs-01/project.yaml");
+		Object object;
+		try {
+			object = yaml.load(new FileInputStream(inFile));
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		assertThat(object, allOf(notNullValue(), instanceOf(Project.class)));
+		
+		Project project = (Project) object;
+		
+		assertThat(project.getName(), is("x"));
+		assertThat(project.getComponents(), notNullValue());
+		assertThat(project.getComponents().size(), is(2));
+		assertThat(project.getComponents().get(0).getName(), is("x"));
+		assertThat(project.getComponents().get(1).getName(), is("MyComponent"));
+		assertThat(project.getReleases(), notNullValue());
+		assertThat(project.getReleases().size(), is(1));
+		assertThat(project.getReleases().get(0).getName(), is("1.0.0"));
+		assertThat(project.getReleases().get(0).getStatusName(), is(":unreleased"));
+	}
+
+	/* ***********************************************************************/
 }

@@ -9,17 +9,25 @@ import java.util.List;
  */
 public class Project {
 	private String name;
+	private List<Component> components;
 	private List<Release> releases;
 	private List<Issue> issues;
 	
 	/**
 	 * Constructor.
-	 * @param name Name of a DITZ project.
 	 */
-	public Project(String name) {
-		this.name = name;
+	public Project() {
+		components = new LinkedList<Component>();
 		releases = new LinkedList<Release>();
 		issues = new LinkedList<Issue>();
+	}
+
+	/**
+	 * Sets name for a project.
+	 * @param name new name.
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
@@ -29,21 +37,29 @@ public class Project {
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
-	 * Add new release.
-	 * @param release release to be registered.
+	 * Get project's components.
+	 * @return list of components.
 	 */
-	public void addRelease(Release release) {
-		releases.add(release);
+	public List<Component> getComponents() {
+		return components;
 	}
 
 	/**
-	 * Add new issue.  
-	 * @param issue issue to be registered.
+	 * Get project's releases.
+	 * @return list of releases.
 	 */
-	public void addIssue(Issue issue) {
-		issues.add(issue);
+	public List<Release> getReleases() {
+		return releases;
+	}
+
+	/**
+	 * Get project's issues.  
+	 * @return list of issues.
+	 */
+	public List<Issue> getIssues() {
+		return issues;
 	}
 
 }
