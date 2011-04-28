@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: noo
+desc: ""
+type: :bugfix
+component: x
+release: 
+reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
+status: :unstarted
+disposition: 
+creation_time: 2011-04-27 19:21:14.258132 Z
+references: []
+
+id: 6bc7bb4238a13c55790b73c132e716b74cf65079
+log_events: 
+- - 2011-04-27 19:21:16.446565 Z
+  - Karolis Petrauskas <k.petrauskas@gmail.com>
+  - created
+  - ""

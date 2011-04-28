@@ -14,6 +14,14 @@ http://ditz.rubyforge.org/
 http://jenkins-ci.org/
 
 
+Design decisions
+================
+ * Use yaml parser instead of ditz program to read bug information.
+   The arguments for this decisions are:
+   - Installation of the plugin will be easier. Wil be no dependency on ditz.
+   - ditz program looks a bit to interactive (e.g. tries to create .ditz-config).
+
+
 Some commands for development
 =============================
 

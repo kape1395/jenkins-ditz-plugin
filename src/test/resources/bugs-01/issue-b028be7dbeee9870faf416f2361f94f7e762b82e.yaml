@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Bug in release
+desc: Desc.
+type: :task
+component: x
+release: 1.0.0
+reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
+status: :unstarted
+disposition: 
+creation_time: 2011-04-27 22:27:04.906125 Z
+references: []
+
+id: b028be7dbeee9870faf416f2361f94f7e762b82e
+log_events: 
+- - 2011-04-27 22:27:14.934561 Z
+  - Karolis Petrauskas <k.petrauskas@gmail.com>
+  - created
+  - comment.

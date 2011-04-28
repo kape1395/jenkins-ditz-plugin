@@ -1,0 +1,16 @@
+--- !ditz.rubyforge.org,2008-03-06/project 
+name: x
+version: "0.5"
+components: 
+- !ditz.rubyforge.org,2008-03-06/component 
+  name: x
+releases: 
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: 1.0.0
+  status: :unreleased
+  release_time: 
+  log_events: 
+  - - 2011-04-27 22:12:40.734067 Z
+    - Karolis Petrauskas <k.petrauskas@gmail.com>
+    - created
+    - Release comments.

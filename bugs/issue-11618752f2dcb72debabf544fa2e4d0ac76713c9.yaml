@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Create base class DitzClassConstruct.
+desc: |-
+  Inherit all other from this. Add type-safe method for handling node.
+  Add some utility methods to handle tuple nodes.
+type: :task
+component: jenkins-ditz-plugin
+release: 0.1.0
+reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
+status: :unstarted
+disposition: 
+creation_time: 2011-04-28 00:35:45.510615 Z
+references: []
+
+id: 11618752f2dcb72debabf544fa2e4d0ac76713c9
+log_events: 
+- - 2011-04-28 00:35:47.054066 Z
+  - Karolis Petrauskas <k.petrauskas@gmail.com>
+  - created
+  - ""
