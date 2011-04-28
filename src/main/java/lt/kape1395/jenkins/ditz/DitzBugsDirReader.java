@@ -23,6 +23,11 @@ import lt.kape1395.jenkins.ditz.yaml.DitzYamlConstructor;
 public class DitzBugsDirReader {
 	
 	/**
+	 * Default name of the ditz project file.
+	 */
+	public static final String DEFAULT_PROJECT_FILE_NAME = "project.yaml";
+	
+	/**
 	 * Yaml parser.
 	 */
 	private Yaml yaml;
@@ -31,7 +36,7 @@ public class DitzBugsDirReader {
 	 * Name of the project file in the DITZ bugs directory.
 	 * Default is "project.yaml".
 	 */
-	private String projectFileName = "project.yaml";
+	private String projectFileName = DEFAULT_PROJECT_FILE_NAME;
 	
 	/**
 	 * Suffix of the issue files in the DITZ bugs directory.

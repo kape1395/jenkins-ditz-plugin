@@ -1,6 +1,7 @@
 <!--
-  This view is used to render the installed plugins page.
--->
+ ! This view is used to render the installed plugins page.
+ !-->
 <div>
-  This plugin is a sample to explain how to write a Jenkins plugin.
+    Shows dynamics of your bugs, features and tasks,
+    that are tracked using Ditz.
 </div>
