@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Apply Apache licence.
+desc: ""
+type: :task
+component: jenkins-ditz-plugin
+release: 0.1.0
+reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
+status: :unstarted
+disposition: 
+creation_time: 2011-04-29 11:52:11.638616 Z
+references: []
+
+id: 34c3559e42fa44b90d3812536c94decb16f98a87
+log_events: 
+- - 2011-04-29 11:52:13.610061 Z
+  - Karolis Petrauskas <k.petrauskas@gmail.com>
+  - created
+  - ""

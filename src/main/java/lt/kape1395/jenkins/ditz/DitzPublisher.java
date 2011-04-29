@@ -1,8 +1,12 @@
 package lt.kape1395.jenkins.ditz;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+
+import lt.kape1395.jenkins.ditz.model.Project;
 
 import org.kohsuke.stapler.AncestorInPath;
 import org.kohsuke.stapler.DataBoundConstructor;
@@ -25,6 +29,7 @@ import hudson.util.FormValidation;
  * @author k.petrauskas
  */
 public class DitzPublisher extends Recorder {
+	private static final String DITZ_PROJECT_FILE = "ditzProject.xml";
 	/**
 	 * Ditz bugs directory.
 	 */
@@ -61,7 +66,23 @@ public class DitzPublisher extends Recorder {
 			AbstractBuild<?, ?> build,
 			Launcher launcher,
 			BuildListener listener) throws InterruptedException, IOException {
-		listener.getLogger().println("############## DitzPublisher::perform");
+		listener.getLogger().println("DitzPublisher::perform - start");
+		
+		FilePath ws = build.getProject().getSomeWorkspace();
+		
+		try {
+			File ditzBugsDir = new File(ws.child(getBugsDir()).absolutize().getName());
+			File ditzXmlFile = new File(build.getRootDir(), DITZ_PROJECT_FILE);
+
+			// Copy Ditz data from workspace to the build directory.
+			Project project = new DitzBugsDirReader(ditzBugsDir).loadProject();
+			new XStreamDataSerializer(ditzXmlFile).saveProject(project);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		listener.getLogger().println("DitzPublisher::perform - end");
 		return true;
 	}
 
@@ -99,6 +120,7 @@ public class DitzPublisher extends Recorder {
          * Performs on-the-fly validation on the file mask wildcard.
          * Bugs directory should exist.
          */
+        @SuppressWarnings("unchecked")
         public FormValidation doCheckBugsDir(
         		@AncestorInPath AbstractProject project,
         		@QueryParameter String value) throws IOException, ServletException {
@@ -118,7 +140,8 @@ public class DitzPublisher extends Recorder {
         /**
          * Applicable to all project types.
          */
-        public boolean isApplicable(Class<? extends AbstractProject> jobType) {
+        @SuppressWarnings("unchecked")
+		public boolean isApplicable(Class<? extends AbstractProject> jobType) {
             return true;
         }
     }

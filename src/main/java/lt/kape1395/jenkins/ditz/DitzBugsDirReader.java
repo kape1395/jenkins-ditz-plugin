@@ -20,13 +20,18 @@ import lt.kape1395.jenkins.ditz.yaml.DitzYamlConstructor;
  *
  * @author k.petrauskas
  */
-public class DitzBugsDirReader {
+public class DitzBugsDirReader implements DitzProjectDAO {
 	
 	/**
 	 * Default name of the ditz project file.
 	 */
 	public static final String DEFAULT_PROJECT_FILE_NAME = "project.yaml";
 	
+	/**
+	 * Ditz "bugs" directory.
+	 */
+	private File bugsDir;
+
 	/**
 	 * Yaml parser.
 	 */
@@ -46,8 +51,29 @@ public class DitzBugsDirReader {
 
 	/**
 	 * This constructor configures yaml parser internally.
+	 * @param bugsDir Ditz bugs directory.
 	 */
-	public DitzBugsDirReader() {
+	public DitzBugsDirReader(File bugsDir) {
+		this.bugsDir = bugsDir;
+		this.yaml = createConfiguredYaml();
+	}
+	
+	/**
+	 * This constructor takes pre-configured yaml parser.
+	 * @param bugsDir Ditz bugs directory.
+	 * @param yaml Yaml parser, configured to parse ditz data files.
+	 */
+	public DitzBugsDirReader(File bugsDir, Yaml yaml) {
+		this.bugsDir = bugsDir;
+		this.yaml = yaml;
+	}
+	
+	/**
+	 * Create and configure Yaml parser.
+	 * This is invoked if the parser is not supplied to this object via constructor. 
+	 * @return Configured Yaml instance.
+	 */
+	protected Yaml createConfiguredYaml() {
 		DitzIssueConstruct ditzIssueConstruct = new DitzIssueConstruct();
 		DitzProjectConstruct ditzProjectConstruct = new DitzProjectConstruct();
 		
@@ -55,25 +81,14 @@ public class DitzBugsDirReader {
 		delegatingConstruct.addConstruct(DitzIssueConstruct.YAML_CLASS, ditzIssueConstruct);
 		delegatingConstruct.addConstruct(DitzProjectConstruct.YAML_CLASS, ditzProjectConstruct);
 		
-		yaml = new Yaml(new DitzYamlConstructor(delegatingConstruct));
+		return new Yaml(new DitzYamlConstructor(delegatingConstruct));
 	}
-	
-	/**
-	 * This constructor takes pre-configured yaml parser.
-	 * @param yaml Yaml parser, configured to parse ditz data files.
-	 */
-	public DitzBugsDirReader(Yaml yaml) {
-		this.yaml = yaml;
-	}
-	
+
 	/**
 	 * Read bugs directory.
-	 *
-	 * @param bugsDir Bugs directory.
-	 * @return Project.
-	 * @throws Exception if something goes wrong.
+	 * {@inheritDoc} 
 	 */
-	public Project readBugsDir(File bugsDir) throws Exception {
+	public Project loadProject() throws Exception {
 		File projectFile = new File(bugsDir, projectFileName);
 		Project project = (Project) yaml.load(new FileInputStream(projectFile));
 		
@@ -83,6 +98,15 @@ public class DitzBugsDirReader {
 			project.getIssues().add(issue);
 		}
 		return project;
+	}
+
+	/**
+	 * Not implemented.
+	 * {@inheritDoc}
+	 * @throws Exception always.
+	 */
+	public void saveProject(Project project) throws Exception {
+		throw new Exception("Operation saveProject is not supported by " + getClass().getName());
 	}
 
 	/**
@@ -114,4 +138,5 @@ public class DitzBugsDirReader {
 		}
 		
 	}
+
 }

@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Load component of the issue from yaml also.
+desc: ""
+type: :bugfix
+component: jenkins-ditz-plugin
+release: 0.1.0
+reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
+status: :unstarted
+disposition: 
+creation_time: 2011-04-29 11:54:24.110127 Z
+references: []
+
+id: 5e583dcbb8f590b8e9ee580fd87fcaab649106de
+log_events: 
+- - 2011-04-29 11:54:27.574077 Z
+  - Karolis Petrauskas <k.petrauskas@gmail.com>
+  - created
+  - ","

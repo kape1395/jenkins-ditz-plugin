@@ -4,7 +4,6 @@ import java.io.File;
 
 import lt.kape1395.jenkins.ditz.model.Project;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -15,12 +14,6 @@ import static org.hamcrest.Matchers.*;
  * @author k.petrauskas
  */
 public class DitzBugsDirReaderTest {
-	private DitzBugsDirReader ditzBugsDirReader;
-	
-	@BeforeMethod
-	public void beforeMethod() {
-		ditzBugsDirReader = new DitzBugsDirReader();
-	}
 
 	/* ***********************************************************************/
 	/**
@@ -28,7 +21,9 @@ public class DitzBugsDirReaderTest {
 	 */
 	@Test
 	public void testReadBugsDir() throws Exception {
-		Project project = ditzBugsDirReader.readBugsDir(new File("src/test/resources/bugs-01"));
+		File ditzBugsDir = new File("src/test/resources/bugs-01");
+		DitzBugsDirReader ditzBugsDirReader = new DitzBugsDirReader(ditzBugsDir);
+		Project project = ditzBugsDirReader.loadProject();
 
 		assertThat(project.getName(), is("x"));
 		assertThat(project.getIssues().size(), is(2));
