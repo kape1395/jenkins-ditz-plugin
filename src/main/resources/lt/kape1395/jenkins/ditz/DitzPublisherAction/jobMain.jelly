@@ -1,0 +1,26 @@
+<j:jelly
+    xmlns:j="jelly:core"
+    xmlns:st="jelly:stapler"
+    xmlns:d="jelly:define"
+    xmlns:l="/lib/layout"
+    xmlns:t="/lib/hudson"
+    xmlns:f="/lib/form"
+    xmlns:i="jelly:fmt">
+    
+    <j:set var="pStat" value="${it.project.issueStats}"/>
+    <h2>${%heading}</h2>
+    <p>
+        ${%statsTotal}:<st:nbsp/>
+        <b>${pStat.openIssues}<st:nbsp/>(-${pStat.closedIssues},<st:nbsp/>+${pStat.newIssues})</b>,
+        ${%statsByRelease}:
+    </p>
+    <ul>
+        <j:forEach var="r" items="${it.project.releases}">
+            <j:set var="rStat" value="${r.issueStats}"/>
+            <li>
+                ${r.name}:<st:nbsp/>
+                ${rStat.openIssues}<st:nbsp/>(-${rStat.closedIssues},<st:nbsp/>+${rStat.newIssues})
+            </li>
+        </j:forEach>
+    </ul>
+</j:jelly>

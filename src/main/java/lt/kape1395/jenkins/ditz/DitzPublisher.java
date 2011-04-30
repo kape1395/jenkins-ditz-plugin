@@ -3,6 +3,9 @@ package lt.kape1395.jenkins.ditz;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 
@@ -17,6 +20,7 @@ import hudson.FilePath;
 import hudson.Launcher;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
+import hudson.model.Action;
 import hudson.model.BuildListener;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildStepMonitor;
@@ -29,6 +33,7 @@ import hudson.util.FormValidation;
  * @author k.petrauskas
  */
 public class DitzPublisher extends Recorder {
+
 	private static final String DITZ_PROJECT_FILE = "ditzProject.xml";
 	/**
 	 * Ditz bugs directory.
@@ -147,4 +152,8 @@ public class DitzPublisher extends Recorder {
     }
 
 	/* ********************************************************************* */
+	@Override
+	public Collection<? extends Action> getProjectActions(AbstractProject<?, ?> project) {
+		return Collections.<Action>singleton(new DitzPublisherAction());
+	}
 }

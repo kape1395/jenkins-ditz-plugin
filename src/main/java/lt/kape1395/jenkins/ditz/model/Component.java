@@ -4,7 +4,8 @@ package lt.kape1395.jenkins.ditz.model;
  * Represents component in the DITZ data model.
  * @author k.petrauskas
  */
-public class Component {
+public class Component extends AbstractIssueStatsCategory {
+
 	/**
 	 * Component's name.
 	 */

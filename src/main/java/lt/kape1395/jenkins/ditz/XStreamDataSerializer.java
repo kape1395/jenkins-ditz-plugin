@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 
 import lt.kape1395.jenkins.ditz.model.Component;
 import lt.kape1395.jenkins.ditz.model.Issue;
+import lt.kape1395.jenkins.ditz.model.IssueStats;
 import lt.kape1395.jenkins.ditz.model.Project;
 import lt.kape1395.jenkins.ditz.model.Release;
 
@@ -49,8 +50,9 @@ public class XStreamDataSerializer implements DitzProjectDAO {
 		xstream.alias("release", Release.class);
 		xstream.alias("component", Component.class);
 		xstream.alias("issue", Issue.class);
+		xstream.alias("issueStats", IssueStats.class);
 		xstream.setMode(XStream.XPATH_RELATIVE_REFERENCES);
-		//xstream.omitField(definedIn, fieldName);
+		xstream.omitField(IssueStats.class, "stats");
 		return xstream;
 	}
 

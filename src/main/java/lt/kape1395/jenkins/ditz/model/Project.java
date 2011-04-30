@@ -7,7 +7,7 @@ import java.util.List;
  * Represents DITZ project.
  * @author k.petrauskas
  */
-public class Project {
+public class Project extends AbstractIssueStatsCategory {
 	private String name;
 	private List<Component> components;
 	private List<Release> releases;

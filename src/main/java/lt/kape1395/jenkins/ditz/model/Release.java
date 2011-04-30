@@ -4,7 +4,7 @@ package lt.kape1395.jenkins.ditz.model;
  * Represents release in the DITZ data model.
  * @author k.petrauskas
  */
-public class Release {
+public class Release extends AbstractIssueStatsCategory {
 	/**
 	 * Name of a release.
 	 */

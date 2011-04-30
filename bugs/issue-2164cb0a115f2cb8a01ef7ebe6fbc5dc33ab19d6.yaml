@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Handle IssueStatus using inheritance.
+desc: ""
+type: :task
+component: jenkins-ditz-plugin
+release: 0.1.0
+reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
+status: :unstarted
+disposition: 
+creation_time: 2011-04-30 19:56:00.230121 Z
+references: []
+
+id: 2164cb0a115f2cb8a01ef7ebe6fbc5dc33ab19d6
+log_events: 
+- - 2011-04-30 19:56:01.374055 Z
+  - Karolis Petrauskas <k.petrauskas@gmail.com>
+  - created
+  - ""
