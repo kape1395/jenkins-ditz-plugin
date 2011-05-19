@@ -19,11 +19,9 @@
 package lt.kape1395.jenkins.ditz;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 

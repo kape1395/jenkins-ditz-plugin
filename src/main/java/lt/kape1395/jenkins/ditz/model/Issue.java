@@ -48,6 +48,31 @@ public class Issue {
 	 * String representation of issue release.
 	 */
 	private String releaseName;
+	
+	/**
+	 * String representation of issue component.
+	 */
+	private String componentName;
+
+	/**
+	 * Constructor.
+	 * @param id Id.
+	 * @param title Title.
+	 * @param typeName Type.
+	 * @param statusName Status.
+	 * @param releaseName Release.
+	 * @param componentName Component.
+	 */
+	public Issue(
+			String id, String title, String typeName,
+			String statusName, String releaseName, String componentName) {
+		this.id = id;
+		this.title = title;
+		this.typeName = typeName;
+		this.statusName = statusName;
+		this.releaseName = releaseName;
+		this.componentName = componentName;
+	}
 
 	/**
 	 * Constructor.
@@ -85,6 +110,10 @@ public class Issue {
 
 	public String getReleaseName() {
 		return releaseName;
+	}
+
+	public String getComponentName() {
+		return componentName;
 	}
 
 }

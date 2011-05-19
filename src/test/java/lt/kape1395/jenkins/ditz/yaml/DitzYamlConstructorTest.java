@@ -64,6 +64,7 @@ public class DitzYamlConstructorTest {
 		assertThat(issue.getTypeName(), is(":bugfix"));
 		assertThat(issue.getStatusName(), is(":unstarted"));
 		assertThat(issue.getReleaseName(), nullValue());
+		assertThat(issue.getComponentName(), is("x"));
 		
 		issue = (Issue) object2;
 		assertThat(issue.getId(), is("b028be7dbeee9870faf416f2361f94f7e762b82e"));

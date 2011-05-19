@@ -36,7 +36,7 @@ public class XStreamDataSerializerTest {
 		project.getComponents().add(new Component("c3"));
 		project.getIssues().add(new Issue("id1", "title1", ":type1", "status1", "r1"));
 		project.getIssues().add(new Issue("id2", "title2", ":type2", "status2", "r1"));
-		project.getIssues().add(new Issue("id3", "title3", ":type3", "status3", "r2"));
+		project.getIssues().add(new Issue("id3", "title3", ":type3", "status3", "r2", "x"));
 
 		serializer.saveProject(project);
 		Project project2 = serializer.loadProject();
@@ -45,6 +45,7 @@ public class XStreamDataSerializerTest {
 		assertThat(project2.getReleases().size(), is(2));
 		assertThat(project2.getComponents().size(), is(3));
 		assertThat(project2.getIssues().size(), is(3));
+		assertThat(project2.getIssues().get(2).getComponentName(), is("x"));
 	}
 
 	/* ***********************************************************************/

@@ -50,6 +50,7 @@ public class DitzIssueConstruct extends AbstractConstruct {
 		String typeName = null;
 		String statusName = null;
 		String releaseName = null;
+		String componentName = null;
 		
 		for (NodeTuple nodeTuple : mappingNode.getValue()) {
 			if (!(nodeTuple.getKeyNode() instanceof ScalarNode)) {
@@ -75,10 +76,12 @@ public class DitzIssueConstruct extends AbstractConstruct {
 				statusName = value;
 			} else if (key.equalsIgnoreCase("release")) {
 				releaseName = value;
+			} else if (key.equalsIgnoreCase("component")) {
+				componentName = value;
 			}
 		}
 		
-		return new Issue(id, title, typeName, statusName, releaseName);
+		return new Issue(id, title, typeName, statusName, releaseName, componentName);
 	}
 
 }
