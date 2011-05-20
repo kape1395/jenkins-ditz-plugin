@@ -16,21 +16,8 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package lt.kape1395.jenkins.ditz;
-
-import lt.kape1395.jenkins.ditz.model.Project;
 
 /**
- * 
- * @author k.petrauskas
+ * Core implementation. 
  */
-public interface IssueStatsCollector {
-
-	/**
-	 * Collect issue statistics.
-	 *
-	 * @param project Project to be processed.
-	 */
-	void collectStatistics(Project project);
-
-}
+package lt.kape1395.jenkins.ditz;

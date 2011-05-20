@@ -24,6 +24,13 @@ package lt.kape1395.jenkins.ditz.model;
  */
 public class IssueStats {
 	
+	/**
+	 * 
+	 */
+	public static enum StatField {
+		OPEN, NEW, CLOSED;
+	}
+	
 	private int openIssues;
 	private int newIssues;
 	private int closedIssues;
@@ -42,6 +49,25 @@ public class IssueStats {
 		openIssues = 0;
 		newIssues = 0;
 		closedIssues = 0;
+	}
+	
+	/**
+	 * 
+	 * @param field
+	 */
+	public void increment(StatField field) {
+		switch (field) {
+		case OPEN:
+				openIssues++;
+				break;
+		case NEW:
+				openIssues++;
+				newIssues++;
+				break;
+		case CLOSED:
+				closedIssues++;
+				break;
+		}
 	}
 	
 	/**
