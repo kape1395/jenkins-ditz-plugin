@@ -23,6 +23,10 @@ package lt.kape1395.jenkins.ditz.model;
  * @author k.petrauskas
  */
 public class Issue {
+	public static final String STATUS_UNSTARTED = ":unstarted";
+	public static final String STATUS_IN_PROGRESS = ":in_progress";
+	public static final String STATUS_PAUSED = ":paused";
+	public static final String STATUS_CLOSED = ":closed";
 	
 	/**
 	 * Unique ID.
@@ -90,6 +94,10 @@ public class Issue {
 		this.typeName = typeName;
 		this.statusName = statusName;
 		this.releaseName = releaseName;
+	}
+	
+	public boolean isOpen() {
+		return statusName != null && !statusName.equalsIgnoreCase(STATUS_CLOSED);
 	}
 
 	public String getId() {

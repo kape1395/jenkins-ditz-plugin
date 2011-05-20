@@ -70,6 +70,7 @@ public class XStreamDataSerializer implements DitzProjectDAO {
 		xstream.alias("issue", Issue.class);
 		xstream.alias("issueStats", IssueStats.class);
 		xstream.setMode(XStream.XPATH_RELATIVE_REFERENCES);
+		xstream.omitField(Issue.class, "open");
 		xstream.omitField(IssueStats.class, "stats");
 		return xstream;
 	}

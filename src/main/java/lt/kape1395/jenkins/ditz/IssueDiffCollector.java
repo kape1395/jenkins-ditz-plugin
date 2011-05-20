@@ -16,45 +16,18 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package lt.kape1395.jenkins.ditz.model;
+package lt.kape1395.jenkins.ditz;
 
-/**
- * Base implementation for {@link IssueStats}.
- * @author k.petrauskas
- */
-public class AbstractIssueStatsCategory implements IssueStatCategory {
+import java.util.Collection;
 
-	/**
-	 * Issue statistics per project.
-	 */
-	private IssueStats issueStats;
-	
-	/**
-	 * Constructor.
-	 * Initializes issue statistics.
-	 */
-	public AbstractIssueStatsCategory() {
-		issueStats = new IssueStats();
-	}
+import lt.kape1395.jenkins.ditz.model.Issue;
 
-	/**
-	 * Returns issue statistics.
-	 * @return statistics.
-	 */
-	public IssueStats getIssueStats() {
-		return issueStats;
-	}
 
-	/**
-	 * Set issue statistics.
-	 * @param issueStats New statistics.
-	 */
-	public void setIssueStats(IssueStats issueStats) {
-		if (issueStats == null) {
-			this.issueStats.reset();
-		} else {
-			this.issueStats = issueStats;
-		}
+public class IssueDiffCollector implements IssueStatsCollector {
+
+	public void collectStatistics(Collection<Issue> issues) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
