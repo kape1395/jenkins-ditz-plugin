@@ -21,16 +21,16 @@ package lt.kape1395.jenkins.ditz;
 import lt.kape1395.jenkins.ditz.model.Project;
 
 /**
- * 
+ *
  * @author k.petrauskas
  */
 public interface IssueStatsCollector {
 
-	/**
-	 * Collect issue statistics.
-	 *
-	 * @param project Project to be processed.
-	 */
-	void collectStatistics(Project project);
+    /**
+     * Collect issue statistics.
+     *
+     * @param project Project to be processed.
+     */
+    void collectStatistics(Project project);
 
 }

@@ -26,58 +26,58 @@ import java.util.List;
  * @author k.petrauskas
  */
 public class Project extends AbstractIssueStatsCategory {
-	private String name;
-	private List<Component> components;
-	private List<Release> releases;
-	private List<Issue> issues;
-	
-	/**
-	 * Constructor.
-	 */
-	public Project() {
-		components = new LinkedList<Component>();
-		releases = new LinkedList<Release>();
-		issues = new LinkedList<Issue>();
-	}
+    private String name;
+    private List<Component> components;
+    private List<Release> releases;
+    private List<Issue> issues;
 
-	/**
-	 * Sets name for a project.
-	 * @param name new name.
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * Constructor.
+     */
+    public Project() {
+        components = new LinkedList<Component>();
+        releases = new LinkedList<Release>();
+        issues = new LinkedList<Issue>();
+    }
 
-	/**
-	 * Returns a name of the project.
-	 * @return name.
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * Sets name for a project.
+     * @param name new name.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	/**
-	 * Get project's components.
-	 * @return list of components.
-	 */
-	public List<Component> getComponents() {
-		return components;
-	}
+    /**
+     * Returns a name of the project.
+     * @return name.
+     */
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * Get project's releases.
-	 * @return list of releases.
-	 */
-	public List<Release> getReleases() {
-		return releases;
-	}
+    /**
+     * Get project's components.
+     * @return list of components.
+     */
+    public List<Component> getComponents() {
+        return components;
+    }
 
-	/**
-	 * Get project's issues.  
-	 * @return list of issues.
-	 */
-	public List<Issue> getIssues() {
-		return issues;
-	}
+    /**
+     * Get project's releases.
+     * @return list of releases.
+     */
+    public List<Release> getReleases() {
+        return releases;
+    }
+
+    /**
+     * Get project's issues.
+     * @return list of issues.
+     */
+    public List<Issue> getIssues() {
+        return issues;
+    }
 
 }

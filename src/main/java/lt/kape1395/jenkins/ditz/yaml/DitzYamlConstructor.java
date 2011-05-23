@@ -27,10 +27,10 @@ import org.yaml.snakeyaml.constructor.Constructor;
  */
 public class DitzYamlConstructor extends Constructor {
 
-	/**
-	 * This constructor is here mainly to support IoC and unit tests.
-	 * @param classConstruct Construct, to be used to create classes.
-	 */
+    /**
+     * This constructor is here mainly to support IoC and unit tests.
+     * @param classConstruct Construct, to be used to create classes.
+     */
     public DitzYamlConstructor(Construct classConstruct) {
         this.yamlConstructors.put(null, classConstruct);
     }
@@ -40,8 +40,8 @@ public class DitzYamlConstructor extends Constructor {
      * constructs for all the currently known YAML classes.
      */
     public DitzYamlConstructor() {
-    	DelegatingConstruct construct = new DelegatingConstruct();
-    	construct.addConstruct(DitzIssueConstruct.YAML_CLASS, new DitzIssueConstruct());
+        DelegatingConstruct construct = new DelegatingConstruct();
+        construct.addConstruct(DitzIssueConstruct.YAML_CLASS, new DitzIssueConstruct());
         this.yamlConstructors.put(null, construct);
     }
 

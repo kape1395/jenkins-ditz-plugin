@@ -23,87 +23,87 @@ package lt.kape1395.jenkins.ditz.model;
  * @author k.petrauskas
  */
 public class IssueStats {
-	
-	/**
-	 * 
-	 */
-	public static enum StatField {
-		OPEN, NEW, CLOSED;
-	}
-	
-	private int openIssues;
-	private int newIssues;
-	private int closedIssues;
-	
-	/**
-	 * Constructor. Initializes all to zeros.
-	 */
-	public IssueStats() {
-		reset();
-	}
-	
-	/**
-	 * Initializes all statistics to zeros.
-	 */
-	public void reset() {
-		openIssues = 0;
-		newIssues = 0;
-		closedIssues = 0;
-	}
-	
-	/**
-	 * 
-	 * @param field
-	 */
-	public void increment(StatField field) {
-		switch (field) {
-		case OPEN:
-				openIssues++;
-				break;
-		case NEW:
-				openIssues++;
-				newIssues++;
-				break;
-		case CLOSED:
-				closedIssues++;
-				break;
-		}
-	}
-	
-	/**
-	 * Set some statistic values.
-	 * @param openIssues    Total open issues per category.
-	 * @param newIssues     Total new issues per category from the previous build.
-	 * @param closedIssues 	Total closed issues from the previous build. 
-	 */
-	public void setStats(int openIssues, int newIssues, int closedIssues) {
-		this.openIssues = openIssues;
-		this.newIssues = newIssues;
-		this.closedIssues = closedIssues;
-	}
-	
-	public int getOpenIssues() {
-		return openIssues;
-	}
 
-	public void setOpenIssues(int openIssues) {
-		this.openIssues = openIssues;
-	}
+    /**
+     *
+     */
+    public static enum StatField {
+        OPEN, NEW, CLOSED;
+    }
 
-	public int getNewIssues() {
-		return newIssues;
-	}
+    private int openIssues;
+    private int newIssues;
+    private int closedIssues;
 
-	public void setNewIssues(int newIssues) {
-		this.newIssues = newIssues;
-	}
+    /**
+     * Constructor. Initializes all to zeros.
+     */
+    public IssueStats() {
+        reset();
+    }
 
-	public int getClosedIssues() {
-		return closedIssues;
-	}
+    /**
+     * Initializes all statistics to zeros.
+     */
+    public void reset() {
+        openIssues = 0;
+        newIssues = 0;
+        closedIssues = 0;
+    }
 
-	public void setClosedIssues(int closedIssues) {
-		this.closedIssues = closedIssues;
-	}
+    /**
+     *
+     * @param field
+     */
+    public void increment(StatField field) {
+        switch (field) {
+        case OPEN:
+                openIssues++;
+                break;
+        case NEW:
+                openIssues++;
+                newIssues++;
+                break;
+        case CLOSED:
+                closedIssues++;
+                break;
+        }
+    }
+
+    /**
+     * Set some statistic values.
+     * @param openIssues    Total open issues per category.
+     * @param newIssues     Total new issues per category from the previous build.
+     * @param closedIssues     Total closed issues from the previous build.
+     */
+    public void setStats(int openIssues, int newIssues, int closedIssues) {
+        this.openIssues = openIssues;
+        this.newIssues = newIssues;
+        this.closedIssues = closedIssues;
+    }
+
+    public int getOpenIssues() {
+        return openIssues;
+    }
+
+    public void setOpenIssues(int openIssues) {
+        this.openIssues = openIssues;
+    }
+
+    public int getNewIssues() {
+        return newIssues;
+    }
+
+    public void setNewIssues(int newIssues) {
+        this.newIssues = newIssues;
+    }
+
+    public int getClosedIssues() {
+        return closedIssues;
+    }
+
+    public void setClosedIssues(int closedIssues) {
+        this.closedIssues = closedIssues;
+    }
 
 }

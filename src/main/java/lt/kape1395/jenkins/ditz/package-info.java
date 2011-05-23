@@ -18,6 +18,6 @@
  */
 
 /**
- * Core implementation. 
+ * Core implementation.
  */
 package lt.kape1395.jenkins.ditz;

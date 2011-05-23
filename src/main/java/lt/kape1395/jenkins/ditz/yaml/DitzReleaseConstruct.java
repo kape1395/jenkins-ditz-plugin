@@ -32,44 +32,44 @@ import org.yaml.snakeyaml.nodes.ScalarNode;
  * @author k.petrauskas
  */
 public class DitzReleaseConstruct extends AbstractConstruct {
-	public static final String YAML_CLASS = "!ditz.rubyforge.org,2008-03-06/release";
-	
-	/**
-	 * Implementation of Construct.
-	 * @param node Node to be parsed. It must be of class MappingNode.
-	 * @return issue.
-	 */
-	public Object construct(Node node) {
-		if (!(node instanceof MappingNode)) {
-			throw new YAMLException("MappingNode is required to parse a release.");
-		}
-		MappingNode mappingNode = (MappingNode) node;
-		
-		String name = null;
-		String statusName = null;
-		
-		for (NodeTuple nodeTuple : mappingNode.getValue()) {
-			if (!(nodeTuple.getKeyNode() instanceof ScalarNode)) {
-				continue;
-			}
-			String key = ((ScalarNode) nodeTuple.getKeyNode()).getValue();
-			
-			String value = null;
-			if (nodeTuple.getValueNode() instanceof ScalarNode) {
-				value = ((ScalarNode) nodeTuple.getValueNode()).getValue();
-			}
-			if ("".equals(value)) {
-				value = null;
-			}
-			
-			if (key.equalsIgnoreCase("name")) {
-				name = value;
-			} else if (key.equalsIgnoreCase("status")) {
-				statusName = value;
-			}
-		}
-		
-		return new Release(name, statusName);
-	}
+    public static final String YAML_CLASS = "!ditz.rubyforge.org,2008-03-06/release";
+
+    /**
+     * Implementation of Construct.
+     * @param node Node to be parsed. It must be of class MappingNode.
+     * @return issue.
+     */
+    public Object construct(Node node) {
+        if (!(node instanceof MappingNode)) {
+            throw new YAMLException("MappingNode is required to parse a release.");
+        }
+        MappingNode mappingNode = (MappingNode) node;
+
+        String name = null;
+        String statusName = null;
+
+        for (NodeTuple nodeTuple : mappingNode.getValue()) {
+            if (!(nodeTuple.getKeyNode() instanceof ScalarNode)) {
+                continue;
+            }
+            String key = ((ScalarNode) nodeTuple.getKeyNode()).getValue();
+
+            String value = null;
+            if (nodeTuple.getValueNode() instanceof ScalarNode) {
+                value = ((ScalarNode) nodeTuple.getValueNode()).getValue();
+            }
+            if ("".equals(value)) {
+                value = null;
+            }
+
+            if (key.equalsIgnoreCase("name")) {
+                name = value;
+            } else if (key.equalsIgnoreCase("status")) {
+                statusName = value;
+            }
+        }
+
+        return new Release(name, statusName);
+    }
 
 }

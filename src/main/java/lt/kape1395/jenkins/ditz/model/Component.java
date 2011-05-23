@@ -24,25 +24,25 @@ package lt.kape1395.jenkins.ditz.model;
  */
 public class Component extends AbstractIssueStatsCategory {
 
-	/**
-	 * Component's name.
-	 */
-	private String name;
+    /**
+     * Component's name.
+     */
+    private String name;
 
-	/**
-	 * Constructor.
-	 * @param name Name for the component.
-	 */
-	public Component(String name) {
-		this.name = name;
-	}
+    /**
+     * Constructor.
+     * @param name Name for the component.
+     */
+    public Component(String name) {
+        this.name = name;
+    }
 
-	/**
-	 * Returns component name.
-	 * @return name.
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * Returns component name.
+     * @return name.
+     */
+    public String getName() {
+        return name;
+    }
 
 }

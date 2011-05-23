@@ -55,103 +55,103 @@ import hudson.util.FormValidation;
  * @author k.petrauskas
  */
 public class DitzPublisher extends Recorder {
-	private static Logger log = Logger.getLogger(DitzPublisher.class.getName());
+    private static Logger log = Logger.getLogger(DitzPublisher.class.getName());
 
-	public static final String DITZ_PROJECT_FILE = "ditzProject.xml";
+    public static final String DITZ_PROJECT_FILE = "ditzProject.xml";
 
-	/**
-	 * Ditz bugs directory.
-	 */
-	private String bugsDir;
-	
-	/* ********************************************************************* */
-	/**
-	 * Constructor.
-	 * @param bugsDir Ditz bugs directory.
-	 */
-	@DataBoundConstructor
-	public DitzPublisher(String bugsDir) {
-		this.bugsDir = bugsDir;
-	}
-	
-	/* ********************************************************************* */
-	/**
-	 * Returns bugs directory, used by this project.
-	 * @return Ditz bugs directory.
-	 */
-	public String getBugsDir() {
-		return bugsDir;
-	}
-	
-	/* ********************************************************************* */
-	/**
-	 * Perform real action.
-	 * @param build
-	 * @param launcher
-	 * @param listener
-	 */
-	@Override
-	public boolean perform(
-			AbstractBuild<?, ?> build,
-			Launcher launcher,
-			BuildListener listener) throws InterruptedException, IOException {
-		listener.getLogger().println("DitzPublisher::perform - start");
-		
-		FilePath ws = build.getProject().getSomeWorkspace();
-		
-		try {
-			File ditzBugsDir = new File(ws.child(getBugsDir()).absolutize().getName());
-			File ditzXmlFile = new File(build.getRootDir(), DITZ_PROJECT_FILE);
+    /**
+     * Ditz bugs directory.
+     */
+    private String bugsDir;
 
-			Project project = new DitzBugsDirReader(ditzBugsDir).loadProject();
-	
-			if (build.getPreviousCompletedBuild() != null) {
-				File baseDir = build.getPreviousCompletedBuild().getRootDir();
-				File baseFile = new File(baseDir, DITZ_PROJECT_FILE);
-				if (baseFile.exists()) {
-					log.info("Loading data from the previous build: file=" + baseFile);
-					Project base = new XStreamDataSerializer(baseFile).loadProject();
-					new IssueDiffCollector(base).collectStatistics(project);
-				}
-			} else {
-				new IssueDiffCollector().collectStatistics(project);
-			}
-			
-			new XStreamDataSerializer(ditzXmlFile).saveProject(project);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		listener.getLogger().println("DitzPublisher::perform - end");
-		return true;
-	}
+    /* ********************************************************************* */
+    /**
+     * Constructor.
+     * @param bugsDir Ditz bugs directory.
+     */
+    @DataBoundConstructor
+    public DitzPublisher(String bugsDir) {
+        this.bugsDir = bugsDir;
+    }
 
-	/* ********************************************************************* */
-	/**
-	 * I still don't know, what it is...
-	 */
-	public BuildStepMonitor getRequiredMonitorService() {
-		return BuildStepMonitor.NONE;
-	}
+    /* ********************************************************************* */
+    /**
+     * Returns bugs directory, used by this project.
+     * @return Ditz bugs directory.
+     */
+    public String getBugsDir() {
+        return bugsDir;
+    }
 
-	/* ********************************************************************* */
+    /* ********************************************************************* */
+    /**
+     * Perform real action.
+     * @param build
+     * @param launcher
+     * @param listener
+     */
+    @Override
+    public boolean perform(
+            AbstractBuild<?, ?> build,
+            Launcher launcher,
+            BuildListener listener) throws InterruptedException, IOException {
+        listener.getLogger().println("DitzPublisher::perform - start");
 
-	/**
-	 * Get build step descriptor.
-	 */
-	@Override
-	public DescriptorImpl getDescriptor() {
-		return (DescriptorImpl) super.getDescriptor();
-	}
+        FilePath ws = build.getProject().getSomeWorkspace();
 
-	/**
-	 * Build step description.
-	 */
+        try {
+            File ditzBugsDir = new File(ws.child(getBugsDir()).absolutize().getName());
+            File ditzXmlFile = new File(build.getRootDir(), DITZ_PROJECT_FILE);
+
+            Project project = new DitzBugsDirReader(ditzBugsDir).loadProject();
+
+            if (build.getPreviousCompletedBuild() != null) {
+                File baseDir = build.getPreviousCompletedBuild().getRootDir();
+                File baseFile = new File(baseDir, DITZ_PROJECT_FILE);
+                if (baseFile.exists()) {
+                    log.info("Loading data from the previous build: file=" + baseFile);
+                    Project base = new XStreamDataSerializer(baseFile).loadProject();
+                    new IssueDiffCollector(base).collectStatistics(project);
+                }
+            } else {
+                new IssueDiffCollector().collectStatistics(project);
+            }
+
+            new XStreamDataSerializer(ditzXmlFile).saveProject(project);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        listener.getLogger().println("DitzPublisher::perform - end");
+        return true;
+    }
+
+    /* ********************************************************************* */
+    /**
+     * I still don't know, what it is...
+     */
+    public BuildStepMonitor getRequiredMonitorService() {
+        return BuildStepMonitor.NONE;
+    }
+
+    /* ********************************************************************* */
+
+    /**
+     * Get build step descriptor.
+     */
+    @Override
+    public DescriptorImpl getDescriptor() {
+        return (DescriptorImpl) super.getDescriptor();
+    }
+
+    /**
+     * Build step description.
+     */
     @Extension
     public static class DescriptorImpl extends BuildStepDescriptor<Publisher> {
-    	/**
-    	 * Display name.
-    	 */
+        /**
+         * Display name.
+         */
         public String getDisplayName() {
             return Messages.DitzPublisher_DisplayName();
         }
@@ -162,36 +162,36 @@ public class DitzPublisher extends Recorder {
          */
         @SuppressWarnings("unchecked")
         public FormValidation doCheckBugsDir(
-        		@AncestorInPath AbstractProject project,
-        		@QueryParameter String value) throws IOException, ServletException {
+                @AncestorInPath AbstractProject project,
+                @QueryParameter String value) throws IOException, ServletException {
             FilePath ws = project.getSomeWorkspace();
             if (ws != null) {
-            	FormValidation formValidation = ws.validateRelativeDirectory(value);
-            	if (formValidation.kind != FormValidation.Kind.OK) {
-            		return formValidation;
-            	}
-            	String projectFile = value + "/" + DitzBugsDirReader.DEFAULT_PROJECT_FILE_NAME;
-          		return ws.validateRelativePath(projectFile, true, true);
+                FormValidation formValidation = ws.validateRelativeDirectory(value);
+                if (formValidation.kind != FormValidation.Kind.OK) {
+                    return formValidation;
+                }
+                String projectFile = value + "/" + DitzBugsDirReader.DEFAULT_PROJECT_FILE_NAME;
+                return ws.validateRelativePath(projectFile, true, true);
             } else {
-            	return FormValidation.ok();
+                return FormValidation.ok();
             }
         }
-        
+
         /**
          * Applicable to all project types.
          */
         @SuppressWarnings("unchecked")
-		public boolean isApplicable(Class<? extends AbstractProject> jobType) {
+        public boolean isApplicable(Class<? extends AbstractProject> jobType) {
             return true;
         }
     }
 
-	/* ********************************************************************* */
+    /* ********************************************************************* */
     /**
      * Returns all provided actions.
      */
-	@Override
-	public Collection<? extends Action> getProjectActions(AbstractProject<?, ?> project) {
-		return Collections.<Action>singleton(new DitzPublisherAction(project.getLastBuild()));
-	}
+    @Override
+    public Collection<? extends Action> getProjectActions(AbstractProject<?, ?> project) {
+        return Collections.<Action>singleton(new DitzPublisherAction(project.getLastBuild()));
+    }
 }

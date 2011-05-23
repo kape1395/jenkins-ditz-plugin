@@ -19,109 +19,109 @@
 package lt.kape1395.jenkins.ditz.model;
 
 /**
- * Represents one issue in DITZ. 
+ * Represents one issue in DITZ.
  * @author k.petrauskas
  */
 public class Issue {
-	public static final String STATUS_UNSTARTED = ":unstarted";
-	public static final String STATUS_IN_PROGRESS = ":in_progress";
-	public static final String STATUS_PAUSED = ":paused";
-	public static final String STATUS_CLOSED = ":closed";
-	
-	/**
-	 * Unique ID.
-	 */
-	private String id;
-	
-	/**
-	 * Bug title.
-	 */
-	private String title;
-	
-	/**
-	 * String representation of issue type.
-	 */
-	private String typeName;
-	
-	/**
-	 * String representation of issue status.
-	 */
-	private String statusName;
-	
-	/**
-	 * String representation of issue release.
-	 */
-	private String releaseName;
-	
-	/**
-	 * String representation of issue component.
-	 */
-	private String componentName;
+    public static final String STATUS_UNSTARTED = ":unstarted";
+    public static final String STATUS_IN_PROGRESS = ":in_progress";
+    public static final String STATUS_PAUSED = ":paused";
+    public static final String STATUS_CLOSED = ":closed";
 
-	/**
-	 * Constructor.
-	 * @param id Id.
-	 * @param title Title.
-	 * @param typeName Type.
-	 * @param statusName Status.
-	 * @param releaseName Release.
-	 * @param componentName Component.
-	 */
-	public Issue(
-			String id, String title, String typeName,
-			String statusName, String releaseName, String componentName) {
-		this.id = id;
-		this.title = title;
-		this.typeName = typeName;
-		this.statusName = statusName;
-		this.releaseName = releaseName;
-		this.componentName = componentName;
-	}
+    /**
+     * Unique ID.
+     */
+    private String id;
 
-	/**
-	 * Constructor.
-	 * @param id Id.
-	 * @param title Title.
-	 * @param typeName Type.
-	 * @param statusName Status.
-	 * @param releaseName Release.
-	 */
-	public Issue(
-			String id, String title, String typeName,
-			String statusName, String releaseName) {
-		this.id = id;
-		this.title = title;
-		this.typeName = typeName;
-		this.statusName = statusName;
-		this.releaseName = releaseName;
-	}
-	
-	public boolean isOpen() {
-		return statusName != null && !statusName.equalsIgnoreCase(STATUS_CLOSED);
-	}
+    /**
+     * Bug title.
+     */
+    private String title;
 
-	public String getId() {
-		return id;
-	}
+    /**
+     * String representation of issue type.
+     */
+    private String typeName;
 
-	public String getTitle() {
-		return title;
-	}
+    /**
+     * String representation of issue status.
+     */
+    private String statusName;
 
-	public String getTypeName() {
-		return typeName;
-	}
+    /**
+     * String representation of issue release.
+     */
+    private String releaseName;
 
-	public String getStatusName() {
-		return statusName;
-	}
+    /**
+     * String representation of issue component.
+     */
+    private String componentName;
 
-	public String getReleaseName() {
-		return releaseName;
-	}
+    /**
+     * Constructor.
+     * @param id Id.
+     * @param title Title.
+     * @param typeName Type.
+     * @param statusName Status.
+     * @param releaseName Release.
+     * @param componentName Component.
+     */
+    public Issue(
+            String id, String title, String typeName,
+            String statusName, String releaseName, String componentName) {
+        this.id = id;
+        this.title = title;
+        this.typeName = typeName;
+        this.statusName = statusName;
+        this.releaseName = releaseName;
+        this.componentName = componentName;
+    }
 
-	public String getComponentName() {
-		return componentName;
-	}
+    /**
+     * Constructor.
+     * @param id Id.
+     * @param title Title.
+     * @param typeName Type.
+     * @param statusName Status.
+     * @param releaseName Release.
+     */
+    public Issue(
+            String id, String title, String typeName,
+            String statusName, String releaseName) {
+        this.id = id;
+        this.title = title;
+        this.typeName = typeName;
+        this.statusName = statusName;
+        this.releaseName = releaseName;
+    }
+
+    public boolean isOpen() {
+        return statusName != null && !statusName.equalsIgnoreCase(STATUS_CLOSED);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public String getStatusName() {
+        return statusName;
+    }
+
+    public String getReleaseName() {
+        return releaseName;
+    }
+
+    public String getComponentName() {
+        return componentName;
+    }
 
 }

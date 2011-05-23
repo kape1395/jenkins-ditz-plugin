@@ -25,10 +25,10 @@ package lt.kape1395.jenkins.ditz.model;
  */
 public interface IssueStatCategory {
 
-	/**
-	 * Get issue statistics by category, represented by a class,
-	 * implementing this interface.
-	 * @return Issue statistics.
-	 */
-	public IssueStats getIssueStats();
+    /**
+     * Get issue statistics by category, represented by a class,
+     * implementing this interface.
+     * @return Issue statistics.
+     */
+    public IssueStats getIssueStats();
 }

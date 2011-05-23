@@ -24,37 +24,37 @@ package lt.kape1395.jenkins.ditz.model;
  */
 public class AbstractIssueStatsCategory implements IssueStatCategory {
 
-	/**
-	 * Issue statistics per project.
-	 */
-	private IssueStats issueStats;
-	
-	/**
-	 * Constructor.
-	 * Initializes issue statistics.
-	 */
-	public AbstractIssueStatsCategory() {
-		issueStats = new IssueStats();
-	}
+    /**
+     * Issue statistics per project.
+     */
+    private IssueStats issueStats;
 
-	/**
-	 * Returns issue statistics.
-	 * @return statistics.
-	 */
-	public IssueStats getIssueStats() {
-		return issueStats;
-	}
+    /**
+     * Constructor.
+     * Initializes issue statistics.
+     */
+    public AbstractIssueStatsCategory() {
+        issueStats = new IssueStats();
+    }
 
-	/**
-	 * Set issue statistics.
-	 * @param issueStats New statistics.
-	 */
-	public void setIssueStats(IssueStats issueStats) {
-		if (issueStats == null) {
-			this.issueStats.reset();
-		} else {
-			this.issueStats = issueStats;
-		}
-	}
+    /**
+     * Returns issue statistics.
+     * @return statistics.
+     */
+    public IssueStats getIssueStats() {
+        return issueStats;
+    }
+
+    /**
+     * Set issue statistics.
+     * @param issueStats New statistics.
+     */
+    public void setIssueStats(IssueStats issueStats) {
+        if (issueStats == null) {
+            this.issueStats.reset();
+        } else {
+            this.issueStats = issueStats;
+        }
+    }
 
 }
