@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Create details page.
+desc: ""
+type: :task
+component: jenkins-ditz-plugin
+release: 0.1.0
+reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
+status: :unstarted
+disposition: 
+creation_time: 2011-05-23 20:34:01.775893 Z
+references: []
+
+id: db3b156a716047dfba9337cf212ebb5ad95c306d
+log_events: 
+- - 2011-05-23 20:34:02.703379 Z
+  - Karolis Petrauskas <k.petrauskas@gmail.com>
+  - created
+  - ""

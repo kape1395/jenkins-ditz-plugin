@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Create graph with open bugs by release.
+desc: ""
+type: :task
+component: jenkins-ditz-plugin
+release: 
+reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
+status: :unstarted
+disposition: 
+creation_time: 2011-05-23 20:34:37.635898 Z
+references: []
+
+id: 3f67b42acf042a63ffcc53736dbcc3636e75af4d
+log_events: 
+- - 2011-05-23 20:34:38.935344 Z
+  - Karolis Petrauskas <k.petrauskas@gmail.com>
+  - created
+  - ""

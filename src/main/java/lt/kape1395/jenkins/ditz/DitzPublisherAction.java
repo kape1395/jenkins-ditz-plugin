@@ -18,38 +18,88 @@
  */
 package lt.kape1395.jenkins.ditz;
 
-import lt.kape1395.jenkins.ditz.model.Project;
-import lt.kape1395.jenkins.ditz.model.Release;
+import java.io.File;
+import java.util.logging.Logger;
 
+import lt.kape1395.jenkins.ditz.model.Project;
+
+import hudson.model.AbstractBuild;
 import hudson.model.Action;
 
 /**
- * 
+ * Action, showing general statistics for ditz issues in the middle of the page.
+ * This class is also providing a link in the project menu to access details page
+ * with all ditz info.
+ *
  * @author k.petrauskas
  */
 public class DitzPublisherAction implements Action {
+	private static Logger log = Logger.getLogger(DitzPublisherAction.class.getName());
+	private AbstractBuild<?, ?> owner;
 	private Project project;
 
+	/**
+	 * Constructor.
+	 * @param owner Last build. It is used to load ditz data.
+	 */
+	public DitzPublisherAction(AbstractBuild<?, ?> owner) {
+		this.owner = owner;
+	}
+
+	/**
+	 * Name for the action.
+	 */
 	public String getDisplayName() {
 		return Messages.DitzPublisher_ActionName();
 	}
 
+	/**
+	 * Some icon for the action.
+	 */
 	public String getIconFileName() {
 		return Messages.DitzPublisher_Icon();
 	}
 
+	/**
+	 * Returns link to the details page.
+	 */
 	public String getUrlName() {
 		return "http://karolis.5grupe.lt/";
 	}
-
 	
+	/**
+	 * Returns project data, used in the jelly scripts to display stats to a user.
+	 * Project data is lazily loaded.
+	 * @return Project data. 
+	 */
 	public Project getProject() {
 		if (project == null) {
-			project = new Project();
-			Release r1 = new Release("r1", ":unreleased");
-			r1.getIssueStats().setStats(10, 5, 2);
-			project.getReleases().add(r1);
+			try {
+				project = loadProject();
+			} catch (Exception e) {
+				project = new Project();
+				project.getIssueStats().reset();
+				log.warning("Unable to load project data, using default, exception=" + e);
+			}
 		}
 		return project;
+	}
+	
+	/**
+	 * Load project data to be displayed.
+	 * @return Project data.
+	 * @throws Exception if project cannot be loaded.
+	 */
+	protected Project loadProject() throws Exception {
+		if (owner == null) {
+			throw new Exception("No last build exist.");
+		}
+		
+		File projectFile = new File(owner.getRootDir(), DitzPublisher.DITZ_PROJECT_FILE);
+		if (projectFile.exists()) {
+			return new XStreamDataSerializer(projectFile).loadProject();
+		} else {
+			throw new Exception("file does not exist: " + projectFile);
+		}
 	}
 }

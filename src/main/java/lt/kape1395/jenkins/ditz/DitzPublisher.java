@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 
@@ -37,6 +38,7 @@ import hudson.Launcher;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
+import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildStepMonitor;
@@ -46,11 +48,17 @@ import hudson.util.FormValidation;
 
 /**
  * Ditz information publisher.
+ * It collects ditz info from the workspace and saves to a separate file
+ * under the specific build. This file is then used to get ditz issue
+ * statistics and details.
+ *
  * @author k.petrauskas
  */
 public class DitzPublisher extends Recorder {
+	private static Logger log = Logger.getLogger(DitzPublisher.class.getName());
 
-	private static final String DITZ_PROJECT_FILE = "ditzProject.xml";
+	public static final String DITZ_PROJECT_FILE = "ditzProject.xml";
+
 	/**
 	 * Ditz bugs directory.
 	 */
@@ -95,10 +103,21 @@ public class DitzPublisher extends Recorder {
 			File ditzBugsDir = new File(ws.child(getBugsDir()).absolutize().getName());
 			File ditzXmlFile = new File(build.getRootDir(), DITZ_PROJECT_FILE);
 
-			// Copy Ditz data from workspace to the build directory.
 			Project project = new DitzBugsDirReader(ditzBugsDir).loadProject();
-			new XStreamDataSerializer(ditzXmlFile).saveProject(project);
+	
+			if (build.getPreviousCompletedBuild() != null) {
+				File baseDir = build.getPreviousCompletedBuild().getRootDir();
+				File baseFile = new File(baseDir, DITZ_PROJECT_FILE);
+				if (baseFile.exists()) {
+					log.info("Loading data from the previous build: file=" + baseFile);
+					Project base = new XStreamDataSerializer(baseFile).loadProject();
+					new IssueDiffCollector(base).collectStatistics(project);
+				}
+			} else {
+				new IssueDiffCollector().collectStatistics(project);
+			}
 			
+			new XStreamDataSerializer(ditzXmlFile).saveProject(project);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -168,8 +187,11 @@ public class DitzPublisher extends Recorder {
     }
 
 	/* ********************************************************************* */
+    /**
+     * Returns all provided actions.
+     */
 	@Override
 	public Collection<? extends Action> getProjectActions(AbstractProject<?, ?> project) {
-		return Collections.<Action>singleton(new DitzPublisherAction());
+		return Collections.<Action>singleton(new DitzPublisherAction(project.getLastBuild()));
 	}
 }

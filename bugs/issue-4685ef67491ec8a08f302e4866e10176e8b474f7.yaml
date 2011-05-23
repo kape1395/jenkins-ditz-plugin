@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Remove all tabs.
+desc: ""
+type: :bugfix
+component: jenkins-ditz-plugin
+release: 0.1.0
+reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
+status: :unstarted
+disposition: 
+creation_time: 2011-05-23 20:36:55.883899 Z
+references: []
+
+id: 4685ef67491ec8a08f302e4866e10176e8b474f7
+log_events: 
+- - 2011-05-23 20:36:57.243350 Z
+  - Karolis Petrauskas <k.petrauskas@gmail.com>
+  - created
+  - ""

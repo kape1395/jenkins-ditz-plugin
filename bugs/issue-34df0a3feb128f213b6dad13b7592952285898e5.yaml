@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Add checkstyle, PMD, findbugs.
+desc: ""
+type: :task
+component: jenkins-ditz-plugin
+release: 
+reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
+status: :unstarted
+disposition: 
+creation_time: 2011-05-23 20:36:38.367900 Z
+references: []
+
+id: 34df0a3feb128f213b6dad13b7592952285898e5
+log_events: 
+- - 2011-05-23 20:36:39.079348 Z
+  - Karolis Petrauskas <k.petrauskas@gmail.com>
+  - created
+  - ""
