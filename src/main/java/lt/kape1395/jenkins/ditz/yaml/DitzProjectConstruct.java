@@ -35,8 +35,20 @@ import org.yaml.snakeyaml.nodes.SequenceNode;
  * @author k.petrauskas
  */
 public class DitzProjectConstruct extends AbstractConstruct {
+
+    /**
+     * Name of the ruby class, representing a project.
+     */
     public static final String YAML_CLASS = "!ditz.rubyforge.org,2008-03-06/project";
+
+    /**
+     * Construct to parse components.
+     */
     private DitzComponentConstruct componentConstruct;
+
+    /**
+     * Construct to parse releases.
+     */
     private DitzReleaseConstruct releaseConstruct;
 
     /**
@@ -50,7 +62,7 @@ public class DitzProjectConstruct extends AbstractConstruct {
     /**
      * Constructor for IoC.
      * @param componentConstruct Construct for creating components.
-     * @param releaseConstruct     Construct for creating releases.
+     * @param releaseConstruct   Construct for creating releases.
      */
     public DitzProjectConstruct(
             DitzComponentConstruct componentConstruct,

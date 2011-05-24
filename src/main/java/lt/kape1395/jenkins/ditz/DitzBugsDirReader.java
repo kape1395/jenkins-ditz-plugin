@@ -133,8 +133,17 @@ public class DitzBugsDirReader implements DitzProjectDAO {
      * Filters files that are issues.
      */
     protected static class IssueFileFilter implements FileFilter, Serializable {
+        /**
+         * Required for serializable.
+         */
         private static final long serialVersionUID = -579137861545379815L;
+        /**
+         * Basename fo the project file.
+         */
         private String projectFileName;
+        /**
+         * Suffix for the issue files.
+         */
         private String issueFileSuffix;
 
         /**
@@ -149,8 +158,8 @@ public class DitzBugsDirReader implements DitzProjectDAO {
 
         /**
          * Implementation of FilenameFilter.
-         * @param dir Directory containing the file.
-         * @param name Name of the file to be tested.
+         * @param file File to be tested.
+         * @return true for all issue files.
          */
         public boolean accept(File file) {
             if (file == null) {

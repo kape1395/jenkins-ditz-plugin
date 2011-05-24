@@ -32,6 +32,10 @@ import org.yaml.snakeyaml.nodes.ScalarNode;
  * @author k.petrauskas
  */
 public class DitzReleaseConstruct extends AbstractConstruct {
+
+    /**
+     * Name of the ruby class, representing a release.
+     */
     public static final String YAML_CLASS = "!ditz.rubyforge.org,2008-03-06/release";
 
     /**

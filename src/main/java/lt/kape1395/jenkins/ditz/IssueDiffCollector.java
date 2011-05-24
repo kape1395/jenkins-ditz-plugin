@@ -31,16 +31,20 @@ import lt.kape1395.jenkins.ditz.model.Project;
 import lt.kape1395.jenkins.ditz.model.Release;
 
 /**
- *
+ * Calculates project statistics by comparing ditz project to
+ * one from previous successful build.
  * @author k.petrauskas
  */
 public class IssueDiffCollector implements IssueStatsCollector {
 
+    /**
+     * Previous project (to compare with).
+     */
     private Project baseProject;
 
     /**
-     *
-     * @param baseProject
+     * Constructor.
+     * @param baseProject Previous project/
      */
     public IssueDiffCollector(Project baseProject) {
         if (baseProject != null) {
@@ -48,19 +52,18 @@ public class IssueDiffCollector implements IssueStatsCollector {
         } else {
             this.baseProject = new Project();
         }
-
     }
 
     /**
-     *
-     * @param target
+     * Constructor for the case, when there is no previous build.
+     * In this case all open issues will be new as well.
      */
     public IssueDiffCollector() {
         this(null);
     }
 
     /**
-     *
+     * {@inheritDoc}
      */
     public void collectStatistics(Project project) {
         Set<String> issueIds = new HashSet<String>();
@@ -87,9 +90,9 @@ public class IssueDiffCollector implements IssueStatsCollector {
     }
 
     /**
-     *
-     * @param project
-     * @return
+     * Reset statistics for all releases.
+     * @param project Project to deal with.
+     * @return Map of all releases indexed by release names.
      */
     protected Map<String, IssueStatCategory> resetReleaseStats(Project project) {
         Map<String, IssueStatCategory> releaseStats = new HashMap<String, IssueStatCategory>();
@@ -101,9 +104,9 @@ public class IssueDiffCollector implements IssueStatsCollector {
     }
 
     /**
-     *
-     * @param project
-     * @return
+     * Reset statistics for all components.
+     * @param project Project to deal with.
+     * @return Map of all components indexed by component names.
      */
     protected Map<String, IssueStatCategory> resetComponentStats(Project project) {
         Map<String, IssueStatCategory> componentStats = new HashMap<String, IssueStatCategory>();
@@ -115,9 +118,9 @@ public class IssueDiffCollector implements IssueStatsCollector {
     }
 
     /**
-     *
-     * @param project
-     * @return
+     * Reset project statistics.
+     * @param project Project to deal with.
+     * @return Project statistics (most general stats).
      */
     protected IssueStatCategory resetProjectStats(Project project) {
         project.getIssueStats().reset();
@@ -125,9 +128,21 @@ public class IssueDiffCollector implements IssueStatsCollector {
     }
 
     /**
+     * Process an issue by updating required statistics of
+     * project, release, component, etc.
      *
      * @param sourceIssue
+     *      Issue as it was in the previous build.
+     *      It can be null, if not existed.
      * @param targetIssue
+     *      Issue as is is in the current build.
+     *      It can be bull, if was closed or deleted.
+     * @param projectStats
+     *      Project summary statistics.
+     * @param releaseStats
+     *      Statistics by release.
+     * @param componentStats
+     *      Statistics by component.
      */
     protected void processIssue(
             Issue sourceIssue, Issue targetIssue,
@@ -156,10 +171,10 @@ public class IssueDiffCollector implements IssueStatsCollector {
     }
 
     /**
-     *
-     * @param categoryName
-     * @param categories
-     * @param statisticsField
+     * Add issue to a category by incrementing corresponding statistic field.
+     * @param categoryName      Name of the category to deal with.
+     * @param categories        List of all categories.
+     * @param statisticsField   Field to be incremented.
      */
     protected void addToCategory(
             String categoryName,
@@ -177,4 +192,5 @@ public class IssueDiffCollector implements IssueStatsCollector {
 
         category.getIssueStats().increment(statisticsField);
     }
+
 }

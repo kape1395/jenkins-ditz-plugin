@@ -32,6 +32,9 @@ import org.yaml.snakeyaml.nodes.ScalarNode;
  * @author k.petrauskas
  */
 public class DitzIssueConstruct extends AbstractConstruct {
+    /**
+     * Name of the ruby class, representing an issue.
+     */
     public static final String YAML_CLASS = "!ditz.rubyforge.org,2008-03-06/issue";
 
     /**

@@ -30,5 +30,5 @@ According to https://wiki.jenkins-ci.org/display/JENKINS/Plugin+tutorial,
  * Eclipsize: mvn -DdownloadSources=true -DdownloadJavadocs=true -DoutputDirectory=target/eclipse-classes eclipse:eclipse
  * Debug:     env MAVEN_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=8000,suspend=n" mvn hpi:run
 
-
+mvn checkstyle:checkstyle
 

@@ -26,9 +26,25 @@ import java.util.List;
  * @author k.petrauskas
  */
 public class Project extends AbstractIssueStatsCategory {
+
+    /**
+     * Project name.
+     */
     private String name;
+
+    /**
+     * Components configured in the project.
+     */
     private List<Component> components;
+
+    /**
+     * Releases configured in the project.
+     */
     private List<Release> releases;
+
+    /**
+     * Project issues.
+     */
     private List<Issue> issues;
 
     /**

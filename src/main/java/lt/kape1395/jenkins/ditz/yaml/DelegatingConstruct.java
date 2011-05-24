@@ -47,8 +47,8 @@ public class DelegatingConstruct extends AbstractConstruct {
 
     /**
      * Use this to register all constructors for considered classes.
-     * @param yamlClass
-     * @param construct
+     * @param yamlClass Yaml class.
+     * @param construct Construct to be used for the class.
      */
     public void addConstruct(String yamlClass, Construct construct) {
         constructs.put(yamlClass, construct);

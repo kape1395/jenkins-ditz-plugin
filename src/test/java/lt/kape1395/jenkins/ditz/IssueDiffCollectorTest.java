@@ -45,9 +45,9 @@ public class IssueDiffCollectorTest {
     public void beforeMethod() {
         project = createProjectTemplate();
         base = createProjectTemplate();
-        issue1 = new Issue("id1", "title1", ":type1", Issue.STATUS_UNSTARTED, "r1");
-        issue2 = new Issue("id2", "title2", ":type2", Issue.STATUS_UNSTARTED, "r1");
-        issue3 = new Issue("id3", "title3", ":type3", Issue.STATUS_UNSTARTED, "r2", "c1");
+        issue1 = new Issue("id1", "title1", ":type1", Issue.Status.UNSTARTED.toString(), "r1");
+        issue2 = new Issue("id2", "title2", ":type2", Issue.Status.UNSTARTED.toString(), "r1");
+        issue3 = new Issue("id3", "title3", ":type3", Issue.Status.UNSTARTED.toString(), "r2", "c1");
     }
 
     public Project createProjectTemplate() {

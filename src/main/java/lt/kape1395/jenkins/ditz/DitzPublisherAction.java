@@ -34,8 +34,19 @@ import hudson.model.Action;
  * @author k.petrauskas
  */
 public class DitzPublisherAction implements Action {
+    /**
+     * Logger used for debugging.
+     */
     private static Logger log = Logger.getLogger(DitzPublisherAction.class.getName());
+
+    /**
+     * Current build.
+     */
     private AbstractBuild<?, ?> owner;
+
+    /**
+     * Current project.
+     */
     private Project project;
 
     /**
@@ -48,6 +59,7 @@ public class DitzPublisherAction implements Action {
 
     /**
      * Name for the action.
+     * @return Localized name.
      */
     public String getDisplayName() {
         return Messages.DitzPublisher_ActionName();
@@ -55,6 +67,7 @@ public class DitzPublisherAction implements Action {
 
     /**
      * Some icon for the action.
+     * @return Localized icon file name.
      */
     public String getIconFileName() {
         return Messages.DitzPublisher_Icon();
@@ -62,6 +75,7 @@ public class DitzPublisherAction implements Action {
 
     /**
      * Returns link to the details page.
+     * @return URL of details page.
      */
     public String getUrlName() {
         return "http://karolis.5grupe.lt/";

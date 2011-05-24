@@ -45,6 +45,20 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-checkstyle-plugin</artifactId>
+              <version>2.6</version>
+              <configuration>
+                  <configLocation>src/test/resources/checkstyle-almost_sun_checks.xml</configLocation>
+                  <propertyExpansion>basedir=${basedir}</propertyExpansion>
+              </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <!-- get every artifact through maven.glassfish.org, which proxies all the artifacts that we need -->
     <repositories>
         <repository>

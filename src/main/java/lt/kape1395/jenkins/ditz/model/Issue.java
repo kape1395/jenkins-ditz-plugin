@@ -23,10 +23,6 @@ package lt.kape1395.jenkins.ditz.model;
  * @author k.petrauskas
  */
 public class Issue {
-    public static final String STATUS_UNSTARTED = ":unstarted";
-    public static final String STATUS_IN_PROGRESS = ":in_progress";
-    public static final String STATUS_PAUSED = ":paused";
-    public static final String STATUS_CLOSED = ":closed";
 
     /**
      * Unique ID.
@@ -96,32 +92,104 @@ public class Issue {
         this.releaseName = releaseName;
     }
 
+    /**
+     * Is the issue considered open?
+     * @return true, if issue is open.
+     */
     public boolean isOpen() {
-        return statusName != null && !statusName.equalsIgnoreCase(STATUS_CLOSED);
+        return statusName != null && !statusName.equalsIgnoreCase(Status.CLOSED.toString());
     }
 
+    /**
+     * Get issue id.
+     * @return Issue id.
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Get title of the issue.
+     * @return title.
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Returns string representation of the issue type.
+     * @return type as a string.
+     */
     public String getTypeName() {
         return typeName;
     }
 
+    /**
+     * Returns string representation of the issue status.
+     * @return status as a string.
+     */
     public String getStatusName() {
         return statusName;
     }
 
+    /**
+     * Returns string representation of the release, to which the issue is assigned to.
+     * @return release name.
+     */
     public String getReleaseName() {
         return releaseName;
     }
 
+    /**
+     * Returns string representation of the component, issue is registered for.
+     * @return component name.
+     */
     public String getComponentName() {
         return componentName;
+    }
+
+    /**
+     * Issue statuses.
+     */
+    public static enum Status {
+        /**
+         *  Issue is unstarted. This is an initial status.
+         */
+        UNSTARTED(":unstarted"),
+        /**
+         * Issue is started to deal with.
+         */
+        IN_PROGRESS(":in_progress"),
+        /**
+         * Issue was started and then stopped.
+         */
+        PAUSED(":paused"),
+        /**
+         * Issue was closed with some disposition.
+         */
+        CLOSED(":closed");
+
+        /**
+         * String representation of the status.
+         */
+        private String name;
+
+        /**
+         * Constructor.
+         * @param name String representation of the status.
+         */
+        private Status(String name) {
+            this.name = name;
+        }
+
+        /**
+         * Show it as a string.
+         * @return value as it is used in yaml files.
+         */
+        @Override
+        public String toString() {
+            return name;
+        }
     }
 
 }

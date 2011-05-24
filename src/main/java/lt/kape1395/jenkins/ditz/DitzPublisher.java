@@ -39,7 +39,6 @@ import hudson.Launcher;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
-import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildStepMonitor;
@@ -56,8 +55,14 @@ import hudson.util.FormValidation;
  * @author k.petrauskas
  */
 public class DitzPublisher extends Recorder {
+    /**
+     * Logger.
+     */
     private static Logger log = Logger.getLogger(DitzPublisher.class.getName());
 
+    /**
+     * Default name for an internal ditz project file.
+     */
     public static final String DITZ_PROJECT_FILE = "ditzProject.xml";
 
     /**
@@ -87,9 +92,12 @@ public class DitzPublisher extends Recorder {
     /* ********************************************************************* */
     /**
      * Perform real action.
-     * @param build
-     * @param launcher
-     * @param listener
+     * @param build Current build.
+     * @param launcher Launcher for launching something.
+     * @param listener Build listener.
+     * @return true, always.
+     * @throws InterruptedException is not thrown.
+     * @throws IOException is not thrown.
      */
     @Override
     public boolean perform(
@@ -99,7 +107,7 @@ public class DitzPublisher extends Recorder {
         listener.getLogger().println("DitzPublisher::perform - start");
 
         FilePath ws = build.getWorkspace();
-        
+
         try {
             FilePath ditzBugsDir = ws.child(getBugsDir());
             FilePath ditzXmlFile = new FilePath(build.getRootDir()).child(DITZ_PROJECT_FILE);
@@ -116,7 +124,7 @@ public class DitzPublisher extends Recorder {
                 File baseFile = new File(baseDir, DITZ_PROJECT_FILE);
                 if (baseFile.exists()) {
                     log.info("Loading data from the previous build: file=" + baseFile);
-                    
+
                     Project base = new XStreamDataSerializer(baseFile).loadProject();
                     new IssueDiffCollector(base).collectStatistics(project);
                 }
@@ -135,6 +143,7 @@ public class DitzPublisher extends Recorder {
     /* ********************************************************************* */
     /**
      * I still don't know, what it is...
+     * @return NONE.
      */
     public BuildStepMonitor getRequiredMonitorService() {
         return BuildStepMonitor.NONE;
@@ -144,6 +153,7 @@ public class DitzPublisher extends Recorder {
 
     /**
      * Get build step descriptor.
+     * @return Instance of {@link DescriptorImpl}.
      */
     @Override
     public DescriptorImpl getDescriptor() {
@@ -157,6 +167,7 @@ public class DitzPublisher extends Recorder {
     public static class DescriptorImpl extends BuildStepDescriptor<Publisher> {
         /**
          * Display name.
+         * @return Name of the plugin.
          */
         public String getDisplayName() {
             return Messages.DitzPublisher_DisplayName();
@@ -165,6 +176,11 @@ public class DitzPublisher extends Recorder {
         /**
          * Performs on-the-fly validation on the file mask wildcard.
          * Bugs directory should exist.
+         * @param project Current project.
+         * @param value Bugs directory as a string.
+         * @return Validation info.
+         * @throws ServletException is not thrown.
+         * @throws IOException is not thrown.
          */
         @SuppressWarnings("unchecked")
         public FormValidation doCheckBugsDir(
@@ -185,6 +201,8 @@ public class DitzPublisher extends Recorder {
 
         /**
          * Applicable to all project types.
+         * @param jobType Type of the current job.
+         * @return true.
          */
         @SuppressWarnings("unchecked")
         public boolean isApplicable(Class<? extends AbstractProject> jobType) {
@@ -195,6 +213,8 @@ public class DitzPublisher extends Recorder {
     /* ********************************************************************* */
     /**
      * Returns all provided actions.
+     * @param project Current project.
+     * @return All provided actions.
      */
     @Override
     public Collection<? extends Action> getProjectActions(AbstractProject<?, ?> project) {

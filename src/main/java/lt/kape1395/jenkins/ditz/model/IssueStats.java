@@ -18,21 +18,31 @@
  */
 package lt.kape1395.jenkins.ditz.model;
 
+import java.util.logging.Logger;
+
 /**
  * Aggregated issue statistics.
  * @author k.petrauskas
  */
 public class IssueStats {
+    /**
+     * Logger for debugging.
+     */
+    private static Logger log = Logger.getLogger(IssueStats.class.getName());
 
     /**
-     *
+     * Number of currently open issues.
      */
-    public static enum StatField {
-        OPEN, NEW, CLOSED;
-    }
-
     private int openIssues;
+
+    /**
+     * Number of new issues from the last successful build.
+     */
     private int newIssues;
+
+    /**
+     * Number of closed issues from the last successful build.
+     */
     private int closedIssues;
 
     /**
@@ -52,8 +62,8 @@ public class IssueStats {
     }
 
     /**
-     *
-     * @param field
+     * Increment specified field.
+     * @param field Field to be incremented.
      */
     public void increment(StatField field) {
         switch (field) {
@@ -67,6 +77,8 @@ public class IssueStats {
         case CLOSED:
                 closedIssues++;
                 break;
+        default:
+                log.warning("Trying to increment unknown statistic: " + field);
         }
     }
 
@@ -74,7 +86,7 @@ public class IssueStats {
      * Set some statistic values.
      * @param openIssues    Total open issues per category.
      * @param newIssues     Total new issues per category from the previous build.
-     * @param closedIssues     Total closed issues from the previous build.
+     * @param closedIssues  Total closed issues from the previous build.
      */
     public void setStats(int openIssues, int newIssues, int closedIssues) {
         this.openIssues = openIssues;
@@ -82,28 +94,76 @@ public class IssueStats {
         this.closedIssues = closedIssues;
     }
 
+    /**
+     * Get open issues.
+     * @return number of open issues.
+     * @see #openIssues.
+     */
     public int getOpenIssues() {
         return openIssues;
     }
 
+    /**
+     * Set statistics.
+     * @param openIssues Number of open issues.
+     * @see #openIssues.
+     */
     public void setOpenIssues(int openIssues) {
         this.openIssues = openIssues;
     }
 
+    /**
+     * Get new issues.
+     * @return number of new issues.
+     * @see #newIssues.
+     */
     public int getNewIssues() {
         return newIssues;
     }
 
+    /**
+     * Set statistics.
+     * @param newIssues Number of new issues.
+     * @see #newIssues.
+     */
     public void setNewIssues(int newIssues) {
         this.newIssues = newIssues;
     }
 
+    /**
+     * Get closed issues.
+     * @return number of closed issues.
+     * @see #closedIssues.
+     */
     public int getClosedIssues() {
         return closedIssues;
     }
 
+    /**
+     * Set statistics.
+     * @param closedIssues Number of closed issues.
+     * @see #closedIssues.
+     */
     public void setClosedIssues(int closedIssues) {
         this.closedIssues = closedIssues;
+    }
+
+    /**
+     * Statistic "fields".
+     */
+    public static enum StatField {
+        /**
+         * @see IssueStats#openIssues.
+         */
+        OPEN,
+        /**
+         * @see IssueStats#newIssues.
+         */
+        NEW,
+        /**
+         * @see IssueStats#closedIssues.
+         */
+        CLOSED;
     }
 
 }

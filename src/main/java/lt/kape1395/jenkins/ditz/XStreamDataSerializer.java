@@ -37,8 +37,17 @@ import com.thoughtworks.xstream.XStream;
  * @author k.petrauskas
  */
 public class XStreamDataSerializer implements DitzProjectDAO {
+    /**
+     * Logger for debugging.
+     */
     private static Logger log = Logger.getLogger(XStreamDataSerializer.class.getName());
+    /**
+     * File to deal with. This is an XML file, with xstream serialized objects.
+     */
     private File file;
+    /**
+     * XStream to be used for serialization / deserialization.
+     */
     private XStream xstream;
 
     /**
@@ -57,7 +66,7 @@ public class XStreamDataSerializer implements DitzProjectDAO {
     public XStreamDataSerializer(File file, XStream xstream) {
         this.file = file;
         if (xstream == null) {
-            this.xstream = createConfiguredXStream();    
+            this.xstream = createConfiguredXStream();
         } else {
             this.xstream = xstream;
         }
@@ -69,17 +78,17 @@ public class XStreamDataSerializer implements DitzProjectDAO {
      * @return xstream instance.
      */
     protected XStream createConfiguredXStream() {
-        XStream xstream = new XStream();
-        xstream.setClassLoader(Project.class.getClassLoader());
-        xstream.alias("project", Project.class);
-        xstream.alias("release", Release.class);
-        xstream.alias("component", Component.class);
-        xstream.alias("issue", Issue.class);
-        xstream.alias("issueStats", IssueStats.class);
-        xstream.setMode(XStream.XPATH_RELATIVE_REFERENCES);
-        xstream.omitField(Issue.class, "open");
-        xstream.omitField(IssueStats.class, "stats");
-        return xstream;
+        XStream x = new XStream();
+        x.setClassLoader(Project.class.getClassLoader());
+        x.alias("project", Project.class);
+        x.alias("release", Release.class);
+        x.alias("component", Component.class);
+        x.alias("issue", Issue.class);
+        x.alias("issueStats", IssueStats.class);
+        x.setMode(XStream.XPATH_RELATIVE_REFERENCES);
+        x.omitField(Issue.class, "open");
+        x.omitField(IssueStats.class, "stats");
+        return x;
     }
 
     /**
