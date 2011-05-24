@@ -21,6 +21,7 @@ package lt.kape1395.jenkins.ditz;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.logging.Logger;
 
 import lt.kape1395.jenkins.ditz.model.Component;
 import lt.kape1395.jenkins.ditz.model.Issue;
@@ -36,6 +37,7 @@ import com.thoughtworks.xstream.XStream;
  * @author k.petrauskas
  */
 public class XStreamDataSerializer implements DitzProjectDAO {
+    private static Logger log = Logger.getLogger(XStreamDataSerializer.class.getName());
     private File file;
     private XStream xstream;
 
@@ -44,8 +46,7 @@ public class XStreamDataSerializer implements DitzProjectDAO {
      * @param file File to read from or store to.
      */
     public XStreamDataSerializer(File file) {
-        this.file = file;
-        this.xstream = createConfiguredXStream();
+        this(file, null);
     }
 
     /**
@@ -55,7 +56,12 @@ public class XStreamDataSerializer implements DitzProjectDAO {
      */
     public XStreamDataSerializer(File file, XStream xstream) {
         this.file = file;
-        this.xstream = xstream;
+        if (xstream == null) {
+            this.xstream = createConfiguredXStream();    
+        } else {
+            this.xstream = xstream;
+        }
+        log.info("XStreamDataSerializer(file=" + file + ", ...)");
     }
 
     /**
@@ -64,6 +70,7 @@ public class XStreamDataSerializer implements DitzProjectDAO {
      */
     protected XStream createConfiguredXStream() {
         XStream xstream = new XStream();
+        xstream.setClassLoader(Project.class.getClassLoader());
         xstream.alias("project", Project.class);
         xstream.alias("release", Release.class);
         xstream.alias("component", Component.class);

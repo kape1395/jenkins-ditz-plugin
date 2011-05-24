@@ -18,6 +18,8 @@
  */
 package lt.kape1395.jenkins.ditz;
 
+import hudson.FilePath;
+
 import java.io.File;
 
 import lt.kape1395.jenkins.ditz.model.Project;
@@ -40,7 +42,7 @@ public class DitzBugsDirReaderTest {
     @Test
     public void testReadBugsDir() throws Exception {
         File ditzBugsDir = new File("src/test/resources/bugs-01");
-        DitzBugsDirReader ditzBugsDirReader = new DitzBugsDirReader(ditzBugsDir);
+        DitzBugsDirReader ditzBugsDirReader = new DitzBugsDirReader(new FilePath(ditzBugsDir));
         Project project = ditzBugsDirReader.loadProject();
 
         assertThat(project.getName(), is("x"));

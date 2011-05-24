@@ -1,0 +1,124 @@
+<project>
+  <issueStats>
+    <openIssues>0</openIssues>
+    <newIssues>0</newIssues>
+    <closedIssues>0</closedIssues>
+  </issueStats>
+  <name>jenkins-ditz-plugin</name>
+  <components class="linked-list">
+    <component>
+      <issueStats>
+        <openIssues>0</openIssues>
+        <newIssues>0</newIssues>
+        <closedIssues>0</closedIssues>
+      </issueStats>
+      <name>jenkins-ditz-plugin</name>
+    </component>
+  </components>
+  <releases class="linked-list">
+    <release>
+      <issueStats>
+        <openIssues>0</openIssues>
+        <newIssues>0</newIssues>
+        <closedIssues>0</closedIssues>
+      </issueStats>
+      <name>0.1.0</name>
+      <statusName>:unreleased</statusName>
+    </release>
+  </releases>
+  <issues class="linked-list">
+    <issue>
+      <id>11618752f2dcb72debabf544fa2e4d0ac76713c9</id>
+      <title>Create base class DitzClassConstruct.</title>
+      <typeName>:task</typeName>
+      <statusName>:unstarted</statusName>
+      <releaseName>0.1.0</releaseName>
+      <componentName>jenkins-ditz-plugin</componentName>
+    </issue>
+    <issue>
+      <id>2164cb0a115f2cb8a01ef7ebe6fbc5dc33ab19d6</id>
+      <title>Handle IssueStatus using inheritance.</title>
+      <typeName>:task</typeName>
+      <statusName>:closed</statusName>
+      <releaseName>0.1.0</releaseName>
+      <componentName>jenkins-ditz-plugin</componentName>
+    </issue>
+    <issue>
+      <id>34c3559e42fa44b90d3812536c94decb16f98a87</id>
+      <title>Apply Apache licence.</title>
+      <typeName>:task</typeName>
+      <statusName>:closed</statusName>
+      <releaseName>0.1.0</releaseName>
+      <componentName>jenkins-ditz-plugin</componentName>
+    </issue>
+    <issue>
+      <id>34df0a3feb128f213b6dad13b7592952285898e5</id>
+      <title>Add checkstyle, PMD, findbugs.</title>
+      <typeName>:task</typeName>
+      <statusName>:unstarted</statusName>
+      <componentName>jenkins-ditz-plugin</componentName>
+    </issue>
+    <issue>
+      <id>3f67b42acf042a63ffcc53736dbcc3636e75af4d</id>
+      <title>Create graph with open bugs by release.</title>
+      <typeName>:task</typeName>
+      <statusName>:unstarted</statusName>
+      <componentName>jenkins-ditz-plugin</componentName>
+    </issue>
+    <issue>
+      <id>4685ef67491ec8a08f302e4866e10176e8b474f7</id>
+      <title>Remove all tabs.</title>
+      <typeName>:bugfix</typeName>
+      <statusName>:unstarted</statusName>
+      <releaseName>0.1.0</releaseName>
+      <componentName>jenkins-ditz-plugin</componentName>
+    </issue>
+    <issue>
+      <id>50f7be4585a749e78b3b931f3bdcb80f6caa1896</id>
+      <title>XStream throws exceptions, that the Project class cannot be found.</title>
+      <typeName>:bugfix</typeName>
+      <statusName>:in_progress</statusName>
+      <releaseName>0.1.0</releaseName>
+      <componentName>jenkins-ditz-plugin</componentName>
+    </issue>
+    <issue>
+      <id>5e583dcbb8f590b8e9ee580fd87fcaab649106de</id>
+      <title>Load component of the issue from yaml also.</title>
+      <typeName>:bugfix</typeName>
+      <statusName>:closed</statusName>
+      <releaseName>0.1.0</releaseName>
+      <componentName>jenkins-ditz-plugin</componentName>
+    </issue>
+    <issue>
+      <id>b90ace4d586fee1c314f8f4c2ee67f8040a3c1c5</id>
+      <title>Create icon for the action.</title>
+      <typeName>:task</typeName>
+      <statusName>:unstarted</statusName>
+      <componentName>jenkins-ditz-plugin</componentName>
+    </issue>
+    <issue>
+      <id>cc7396ca4e507ae935fb6137f7544b1446b8ef0f</id>
+      <title>Implement diff for ditzProject.xml</title>
+      <typeName>:task</typeName>
+      <statusName>:closed</statusName>
+      <releaseName>0.1.0</releaseName>
+      <componentName>jenkins-ditz-plugin</componentName>
+    </issue>
+    <issue>
+      <id>d4162fd50b343d2b19ad3b18177755dc5511651c</id>
+      <title>Create configuration parameter for bugs directory.</title>
+      <typeName>:task</typeName>
+      <statusName>:closed</statusName>
+      <releaseName>0.1.0</releaseName>
+      <componentName>jenkins-ditz-plugin</componentName>
+    </issue>
+    <issue>
+      <id>db3b156a716047dfba9337cf212ebb5ad95c306d</id>
+      <title>Create details page.</title>
+      <typeName>:task</typeName>
+      <statusName>:unstarted</statusName>
+      <releaseName>0.1.0</releaseName>
+      <componentName>jenkins-ditz-plugin</componentName>
+    </issue>
+  </issues>
+</project>

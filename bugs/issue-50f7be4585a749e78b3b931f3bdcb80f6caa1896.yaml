@@ -8,8 +8,8 @@ type: :bugfix
 component: jenkins-ditz-plugin
 release: 0.1.0
 reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
-status: :in_progress
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2011-05-23 20:33:36.767900 Z
 references: []
 
@@ -23,3 +23,7 @@ log_events:
   - Karolis Petrauskas <k.petrauskas@gmail.com>
   - changed status from unstarted to in_progress
   - This si stopper now.
+- - 2011-05-24 19:05:21.159370 Z
+  - Karolis Petrauskas <k.petrauskas@gmail.com>
+  - closed with disposition fixed
+  - Solved by setting right classloader (Project.class.getClassLoader()).

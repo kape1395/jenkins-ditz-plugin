@@ -1,5 +1,5 @@
 --- !ditz.rubyforge.org,2008-03-06/issue 
-title: Remove all tabs.
+title: Use FilePath instead of File.
 desc: ""
 type: :bugfix
 component: jenkins-ditz-plugin
@@ -7,16 +7,16 @@ release: 0.1.0
 reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
 status: :closed
 disposition: :fixed
-creation_time: 2011-05-23 20:36:55.883899 Z
+creation_time: 2011-05-23 23:07:49.451900 Z
 references: []
 
-id: 4685ef67491ec8a08f302e4866e10176e8b474f7
+id: 1342a77e264ed630547f9977c6f6aad9f8efa3ea
 log_events: 
-- - 2011-05-23 20:36:57.243350 Z
+- - 2011-05-23 23:07:50.379837 Z
   - Karolis Petrauskas <k.petrauskas@gmail.com>
   - created
   - ""
-- - 2011-05-24 19:05:44.699858 Z
+- - 2011-05-24 19:06:06.663362 Z
   - Karolis Petrauskas <k.petrauskas@gmail.com>
   - closed with disposition fixed
-  - At least for java.
+  - Done.

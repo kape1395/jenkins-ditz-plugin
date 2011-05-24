@@ -19,8 +19,10 @@
 package lt.kape1395.jenkins.ditz;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FilenameFilter;
+import java.io.FileFilter;
+import java.io.Serializable;
+
+import hudson.FilePath;
 
 import org.yaml.snakeyaml.Yaml;
 
@@ -48,7 +50,7 @@ public class DitzBugsDirReader implements DitzProjectDAO {
     /**
      * Ditz "bugs" directory.
      */
-    private File bugsDir;
+    private FilePath bugsDir;
 
     /**
      * Yaml parser.
@@ -71,7 +73,7 @@ public class DitzBugsDirReader implements DitzProjectDAO {
      * This constructor configures yaml parser internally.
      * @param bugsDir Ditz bugs directory.
      */
-    public DitzBugsDirReader(File bugsDir) {
+    public DitzBugsDirReader(FilePath bugsDir) {
         this.bugsDir = bugsDir;
         this.yaml = createConfiguredYaml();
     }
@@ -81,7 +83,7 @@ public class DitzBugsDirReader implements DitzProjectDAO {
      * @param bugsDir Ditz bugs directory.
      * @param yaml Yaml parser, configured to parse ditz data files.
      */
-    public DitzBugsDirReader(File bugsDir, Yaml yaml) {
+    public DitzBugsDirReader(FilePath bugsDir, Yaml yaml) {
         this.bugsDir = bugsDir;
         this.yaml = yaml;
     }
@@ -107,12 +109,12 @@ public class DitzBugsDirReader implements DitzProjectDAO {
      * {@inheritDoc}
      */
     public Project loadProject() throws Exception {
-        File projectFile = new File(bugsDir, projectFileName);
-        Project project = (Project) yaml.load(new FileInputStream(projectFile));
+        FilePath projectFile = bugsDir.child(projectFileName);
+        Project project = (Project) yaml.load(projectFile.read());
 
-        FilenameFilter filter = new IssueFilenameFilter(projectFileName, issueFileSuffix);
-        for (File issueFile : bugsDir.listFiles(filter)) {
-            Issue issue = (Issue) yaml.load(new FileInputStream(issueFile));
+        FileFilter filter = new IssueFileFilter(projectFileName, issueFileSuffix);
+        for (FilePath issueFile : bugsDir.list(filter)) {
+            Issue issue = (Issue) yaml.load(issueFile.read());
             project.getIssues().add(issue);
         }
         return project;
@@ -130,7 +132,8 @@ public class DitzBugsDirReader implements DitzProjectDAO {
     /**
      * Filters files that are issues.
      */
-    protected static class IssueFilenameFilter implements FilenameFilter {
+    protected static class IssueFileFilter implements FileFilter, Serializable {
+        private static final long serialVersionUID = -579137861545379815L;
         private String projectFileName;
         private String issueFileSuffix;
 
@@ -139,7 +142,7 @@ public class DitzBugsDirReader implements DitzProjectDAO {
          * @param projectFileName to be ignored.
          * @param issueFileSuffix to be included.
          */
-        public IssueFilenameFilter(String projectFileName, String issueFileSuffix) {
+        public IssueFileFilter(String projectFileName, String issueFileSuffix) {
             this.projectFileName = projectFileName;
             this.issueFileSuffix = issueFileSuffix;
         }
@@ -149,7 +152,12 @@ public class DitzBugsDirReader implements DitzProjectDAO {
          * @param dir Directory containing the file.
          * @param name Name of the file to be tested.
          */
-        public boolean accept(File dir, String name) {
+        public boolean accept(File file) {
+            if (file == null) {
+                return false;
+            }
+
+            String name = file.getName();
             return name != null
                     && !name.equals(projectFileName)
                     && name.endsWith(issueFileSuffix);

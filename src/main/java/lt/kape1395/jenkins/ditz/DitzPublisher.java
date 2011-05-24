@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
@@ -97,11 +98,16 @@ public class DitzPublisher extends Recorder {
             BuildListener listener) throws InterruptedException, IOException {
         listener.getLogger().println("DitzPublisher::perform - start");
 
-        FilePath ws = build.getProject().getSomeWorkspace();
-
+        FilePath ws = build.getWorkspace();
+        
         try {
-            File ditzBugsDir = new File(ws.child(getBugsDir()).absolutize().getName());
-            File ditzXmlFile = new File(build.getRootDir(), DITZ_PROJECT_FILE);
+            FilePath ditzBugsDir = ws.child(getBugsDir());
+            FilePath ditzXmlFile = new FilePath(build.getRootDir()).child(DITZ_PROJECT_FILE);
+
+            if (log.isLoggable(Level.INFO)) {
+                log.info("ditzBugsDir=" + ditzBugsDir);
+                log.info("ditzXmlFile=" + ditzXmlFile);
+            }
 
             Project project = new DitzBugsDirReader(ditzBugsDir).loadProject();
 
@@ -110,14 +116,14 @@ public class DitzPublisher extends Recorder {
                 File baseFile = new File(baseDir, DITZ_PROJECT_FILE);
                 if (baseFile.exists()) {
                     log.info("Loading data from the previous build: file=" + baseFile);
+                    
                     Project base = new XStreamDataSerializer(baseFile).loadProject();
                     new IssueDiffCollector(base).collectStatistics(project);
                 }
             } else {
                 new IssueDiffCollector().collectStatistics(project);
             }
-
-            new XStreamDataSerializer(ditzXmlFile).saveProject(project);
+            new XStreamDataSerializer(new File(ditzXmlFile.toURI())).saveProject(project);
         } catch (Exception e) {
             e.printStackTrace();
         }
