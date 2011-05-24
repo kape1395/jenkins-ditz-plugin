@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Issue stats are calculated incorrectly.
+desc: |-
+  All zeros are shown on first run.
+  All bugs (not just open) are counted to a total.
+type: :bugfix
+component: jenkins-ditz-plugin
+release: 0.1.0
+reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
+status: :unstarted
+disposition: 
+creation_time: 2011-05-24 22:28:21.391899 Z
+references: []
+
+id: 5e825fcb7623a950abc8c9b1f7dce1d6c1313442
+log_events: 
+- - 2011-05-24 22:28:22.547850 Z
+  - Karolis Petrauskas <k.petrauskas@gmail.com>
+  - created
+  - ""
