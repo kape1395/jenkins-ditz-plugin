@@ -96,8 +96,12 @@ public class XStreamDataSerializer implements DitzProjectDAO {
      */
     public Project loadProject() throws Exception {
         FileInputStream inputStream = new FileInputStream(file);
-        Project project = (Project) xstream.fromXML(inputStream);
-        inputStream.close();
+        Project project;
+        try {
+            project = (Project) xstream.fromXML(inputStream);
+        } finally {
+            inputStream.close();
+        }
         return project;
     }
 
@@ -106,9 +110,12 @@ public class XStreamDataSerializer implements DitzProjectDAO {
      */
     public void saveProject(Project project) throws Exception {
         FileOutputStream outputStream = new FileOutputStream(file);
-        xstream.toXML(project, outputStream);
-        outputStream.flush();
-        outputStream.close();
+        try {
+            xstream.toXML(project, outputStream);
+            outputStream.flush();
+        } finally {
+            outputStream.close();
+        }
     }
 
 }

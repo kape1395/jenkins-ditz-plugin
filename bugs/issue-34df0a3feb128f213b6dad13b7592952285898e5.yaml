@@ -5,8 +5,8 @@ type: :task
 component: jenkins-ditz-plugin
 release: 
 reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2011-05-23 20:36:38.367900 Z
 references: []
 
@@ -20,3 +20,7 @@ log_events:
   - Karolis Petrauskas <k.petrauskas@gmail.com>
   - commented
   - Checkstyle added.
+- - 2011-05-24 22:20:43.319359 Z
+  - Karolis Petrauskas <k.petrauskas@gmail.com>
+  - closed with disposition fixed
+  - Added PMD and findbugs. Checkstyle was added previously.
