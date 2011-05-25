@@ -7,8 +7,8 @@ type: :bugfix
 component: jenkins-ditz-plugin
 release: 0.1.0
 reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2011-05-24 22:28:21.391899 Z
 references: []
 
@@ -18,3 +18,7 @@ log_events:
   - Karolis Petrauskas <k.petrauskas@gmail.com>
   - created
   - ""
+- - 2011-05-25 20:47:04.131861 Z
+  - Karolis Petrauskas <k.petrauskas@gmail.com>
+  - closed with disposition fixed
+  - Fixed 2 bugs.

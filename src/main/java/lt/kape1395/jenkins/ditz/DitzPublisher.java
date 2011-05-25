@@ -118,19 +118,23 @@ public class DitzPublisher extends Recorder {
             }
 
             Project project = new DitzBugsDirReader(ditzBugsDir).loadProject();
+            IssueStatsCollector statsCollector = null;
 
             if (build.getPreviousCompletedBuild() != null) {
                 File baseDir = build.getPreviousCompletedBuild().getRootDir();
                 File baseFile = new File(baseDir, DITZ_PROJECT_FILE);
                 if (baseFile.exists()) {
                     log.info("Loading data from the previous build: file=" + baseFile);
-
                     Project base = new XStreamDataSerializer(baseFile).loadProject();
-                    new IssueDiffCollector(base).collectStatistics(project);
+                    statsCollector = new IssueDiffCollector(base);
                 }
-            } else {
-                new IssueDiffCollector().collectStatistics(project);
             }
+            if (statsCollector == null) {
+                log.info("Ditz data not found in previous build. Calculating stats without base.");
+                statsCollector = new IssueDiffCollector();
+            }
+
+            statsCollector.collectStatistics(project);
             new XStreamDataSerializer(new File(ditzXmlFile.toURI())).saveProject(project);
         } catch (Exception e) {
             e.printStackTrace();

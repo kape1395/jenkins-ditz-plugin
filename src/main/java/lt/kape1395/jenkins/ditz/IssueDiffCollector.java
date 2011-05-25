@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import lt.kape1395.jenkins.ditz.model.Component;
 import lt.kape1395.jenkins.ditz.model.Issue;
@@ -36,6 +37,10 @@ import lt.kape1395.jenkins.ditz.model.Release;
  * @author k.petrauskas
  */
 public class IssueDiffCollector implements IssueStatsCollector {
+    /**
+     * Logger for debugging.
+     */
+    private static Logger log = Logger.getLogger(IssueDiffCollector.class.getName());
 
     /**
      * Previous project (to compare with).
@@ -152,6 +157,15 @@ public class IssueDiffCollector implements IssueStatsCollector {
         Issue issue;
         IssueStats.StatField statField;
 
+        log.fine("processIssue: src=" + sourceIssue + " dst=" + targetIssue);
+
+        if (sourceIssue != null && !sourceIssue.isOpen()) {
+            sourceIssue = null;
+        }
+        if (targetIssue != null && !targetIssue.isOpen()) {
+            targetIssue = null;
+        }
+
         if (sourceIssue != null && targetIssue != null) {
             statField = IssueStats.StatField.OPEN;
             issue = targetIssue;
@@ -164,6 +178,8 @@ public class IssueDiffCollector implements IssueStatsCollector {
         } else {
             return;
         }
+
+        log.fine("processIssue: stat=" + statField + " " + issue);
 
         addToCategory(issue.getReleaseName(), releaseStats, statField);
         addToCategory(issue.getComponentName(), componentStats, statField);

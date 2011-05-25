@@ -70,7 +70,7 @@ public class XStreamDataSerializer implements DitzProjectDAO {
         } else {
             this.xstream = xstream;
         }
-        log.info("XStreamDataSerializer(file=" + file + ", ...)");
+        log.fine("XStreamDataSerializer(file=" + file + ", ...)");
     }
 
     /**

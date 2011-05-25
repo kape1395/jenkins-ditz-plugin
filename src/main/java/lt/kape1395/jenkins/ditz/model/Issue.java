@@ -101,6 +101,20 @@ public class Issue {
     }
 
     /**
+     * Returns the issue as human-readable string.
+     * @return Issue as a string.
+     */
+    @Override
+    public String toString() {
+        return "Issue"
+                + "(id=" + id
+                + " status=" + statusName
+                + " release=" + releaseName
+                + " component=" + componentName
+                + ")";
+    }
+
+    /**
      * Get issue id.
      * @return Issue id.
      */
