@@ -23,7 +23,6 @@ package lt.kape1395.jenkins.ditz.model;
  * @author k.petrauskas
  */
 public class Issue {
-
     /**
      * Unique ID.
      */
@@ -53,6 +52,11 @@ public class Issue {
      * String representation of issue component.
      */
     private String componentName;
+    
+    /**
+     * 
+     */
+    private StatusChange statusChange;
 
     /**
      * Constructor.
@@ -145,6 +149,22 @@ public class Issue {
     public String getStatusName() {
         return statusName;
     }
+    
+    /**
+     * Returns a status change recorded for a particular build.
+     * @return status change indicator.
+     */
+    public StatusChange getStatusChange() {
+        return statusChange;
+    }
+
+    /**
+     * Set new status change indicator.
+     * @param statusChange new status change value.
+     */
+    public void setStatusChange(StatusChange statusChange) {
+        this.statusChange = statusChange;
+    }
 
     /**
      * Returns string representation of the release, to which the issue is assigned to.
@@ -204,6 +224,30 @@ public class Issue {
         public String toString() {
             return name;
         }
+    }
+
+    /**
+     *  Lists status changes, that can be recorded for a particular build. 
+     */
+    public static enum StatusChange {
+        /**
+         * Issue was created in this build.
+         */
+        NEW,
+        /**
+         * Issue was closed in this build.
+         */
+        CLOSED,
+        /**
+         * Issue status is unchanged but additional
+         * information was modified.
+         * This is unused currently.
+         */
+        MODIFIED,
+        /**
+         * Issue is unchanged.
+         */
+        UNCHANGED;
     }
 
 }

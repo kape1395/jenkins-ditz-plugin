@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Something wrong with the getProject and singleton in it.
+desc: Project information is not refreshed after a build.
+type: :bugfix
+component: jenkins-ditz-plugin
+release: 0.1.0
+reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
+status: :unstarted
+disposition: 
+creation_time: 2011-08-17 23:15:12.433689 Z
+references: []
+
+id: d422d2ff738588b57cb8d548553fae2b6086ee7f
+log_events: 
+- - 2011-08-17 23:15:13.301655 Z
+  - Karolis Petrauskas <k.petrauskas@gmail.com>
+  - created
+  - ""

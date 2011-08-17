@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <j:jelly
     xmlns:j="jelly:core"
     xmlns:st="jelly:stapler"
@@ -6,10 +7,27 @@
     xmlns:t="/lib/hudson"
     xmlns:f="/lib/form"
     xmlns:i="jelly:fmt">
-    
-    <html>
-        <body>
-            <p>vajeeee!!! 2</p>
-        </body>
-    </html>
+    <l:layout norefresh="true">
+        <l:main-panel>
+            <h1>${%heading}</h1>
+                <j:forEach var="r" items="${it.project.releases}">
+                    <j:set var="rStat" value="${r.issueStats}"/>
+                    <j:if test="${rStat.interesting}">
+                        <h2>
+                            ${r.name}:<st:nbsp/>
+                            ${rStat.openIssues}<st:nbsp/>(-${rStat.closedIssues},<st:nbsp/>+${rStat.newIssues})
+                        </h2>
+                    </j:if>
+                </j:forEach>
+                <!--
+                <j:set var="unassignedIssues" value="${it.unassignedIssues}"/>
+                <j:if test="${!unassignedIssues.empty}">
+                    <h2>
+                        ${r.name}:<st:nbsp/>
+                        ${rStat.openIssues}<st:nbsp/>(-${rStat.closedIssues},<st:nbsp/>+${rStat.newIssues})
+                    </h2>
+                </j:if>
+                -->
+        </l:main-panel>
+    </l:layout>
 </j:jelly>

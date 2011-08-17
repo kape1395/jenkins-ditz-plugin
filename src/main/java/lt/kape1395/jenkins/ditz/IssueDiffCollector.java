@@ -30,10 +30,15 @@ import lt.kape1395.jenkins.ditz.model.IssueStatCategory;
 import lt.kape1395.jenkins.ditz.model.IssueStats;
 import lt.kape1395.jenkins.ditz.model.Project;
 import lt.kape1395.jenkins.ditz.model.Release;
+import lt.kape1395.jenkins.ditz.model.Issue.StatusChange;
 
 /**
  * Calculates project statistics by comparing ditz project to
  * one from previous successful build.
+ *
+ * Apart from calculating statistics, status changes are set for
+ * all issues. These are used when showing ditz issue details.
+ *
  * @author k.petrauskas
  */
 public class IssueDiffCollector implements IssueStatsCollector {
@@ -42,6 +47,11 @@ public class IssueDiffCollector implements IssueStatsCollector {
      */
     private static Logger log = Logger.getLogger(IssueDiffCollector.class.getName());
 
+    /**
+     * Just to have less of if's in the code.
+     */
+    private static final Issue DUMMY_ISSUE = new Issue("id", "title", "dummyType", "dummyStatus", null);
+    
     /**
      * Previous project (to compare with).
      */
@@ -155,6 +165,7 @@ public class IssueDiffCollector implements IssueStatsCollector {
             Map<String, IssueStatCategory> releaseStats,
             Map<String, IssueStatCategory> componentStats) {
         Issue issue;
+        Issue documentIssue = targetIssue;
         IssueStats.StatField statField;
 
         log.fine("processIssue: src=" + sourceIssue + " dst=" + targetIssue);
@@ -166,15 +177,22 @@ public class IssueDiffCollector implements IssueStatsCollector {
             targetIssue = null;
         }
 
+        if (documentIssue == null) {
+            documentIssue = DUMMY_ISSUE;
+        }
+        documentIssue.setStatusChange(StatusChange.UNCHANGED);
+
         if (sourceIssue != null && targetIssue != null) {
             statField = IssueStats.StatField.OPEN;
             issue = targetIssue;
         } else if (sourceIssue != null) {
             statField = IssueStats.StatField.CLOSED;
             issue = sourceIssue;
+            documentIssue.setStatusChange(StatusChange.CLOSED);
         } else if (targetIssue != null) {
             statField = IssueStats.StatField.NEW;
             issue = targetIssue;
+            documentIssue.setStatusChange(StatusChange.NEW);
         } else {
             return;
         }
