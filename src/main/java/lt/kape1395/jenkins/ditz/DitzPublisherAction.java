@@ -40,6 +40,11 @@ public class DitzPublisherAction implements Action {
     private static Logger log = Logger.getLogger(DitzPublisherAction.class.getName());
 
     /**
+     * Link at which the details page will be displayed.
+     */
+    private static final String URL_NAME = "ditz";
+
+    /**
      * Current build.
      */
     private AbstractBuild<?, ?> owner;
@@ -78,7 +83,7 @@ public class DitzPublisherAction implements Action {
      * @return URL of details page.
      */
     public String getUrlName() {
-        return "http://karolis.5grupe.lt/";
+        return URL_NAME;
     }
 
     /**
