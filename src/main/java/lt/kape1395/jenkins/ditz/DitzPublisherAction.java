@@ -19,9 +19,17 @@
 package lt.kape1395.jenkins.ditz;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.logging.Logger;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.functors.AndPredicate;
+
+import lt.kape1395.jenkins.ditz.model.IssueActivePredicate;
+import lt.kape1395.jenkins.ditz.model.IssueInReleasePredicate;
+import lt.kape1395.jenkins.ditz.model.IssueStatCategoryActivePredicate;
 import lt.kape1395.jenkins.ditz.model.Project;
+import lt.kape1395.jenkins.ditz.model.Release;
 
 import hudson.model.AbstractBuild;
 import hudson.model.Action;
@@ -121,4 +129,36 @@ public class DitzPublisherAction implements Action {
             throw new Exception("file does not exist: " + projectFile);
         }
     }
+
+    /**
+     * Returns active releases.
+     * @return Releases that should be shown on top of the page.
+     */
+    @SuppressWarnings("rawtypes")
+    public Collection getActiveReleases() {
+        return CollectionUtils.select(getProject().getReleases(),
+                new IssueStatCategoryActivePredicate());
+    }
+    
+    /**
+     * 
+     * @param release
+     * @return
+     */
+    @SuppressWarnings("rawtypes")
+    public Collection getActiveReleaseIssues(Release release) {
+        return CollectionUtils.select(getProject().getIssues(),
+                new AndPredicate(new IssueInReleasePredicate(release), new IssueActivePredicate()));
+    }
+    
+    /**
+     * 
+     * @param release
+     * @return
+     */
+    @SuppressWarnings("rawtypes")
+    public Collection getActiveUnassignedIssues() {
+    	return getActiveReleaseIssues(null);
+    }
+    
 }

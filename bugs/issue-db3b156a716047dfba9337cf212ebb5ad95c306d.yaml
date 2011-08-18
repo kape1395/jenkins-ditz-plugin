@@ -5,8 +5,8 @@ type: :task
 component: jenkins-ditz-plugin
 release: 0.1.0
 reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2011-05-23 20:34:01.775893 Z
 references: []
 
@@ -15,4 +15,8 @@ log_events:
 - - 2011-05-23 20:34:02.703379 Z
   - Karolis Petrauskas <k.petrauskas@gmail.com>
   - created
+  - ""
+- - 2011-08-18 23:21:29.029679 Z
+  - Karolis Petrauskas <k.petrauskas@gmail.com>
+  - closed with disposition fixed
   - ""

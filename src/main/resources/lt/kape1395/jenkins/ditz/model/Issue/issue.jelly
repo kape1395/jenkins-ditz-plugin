@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler">
+    <div>
+        <j:choose>
+            <j:when test="${it.statusChange == 'NEW'}">
+                <div style="color:red;">
+                    <div style="display:inline-block; width:20px; padding-left:10px;">+</div>
+                    <span>${it.title}</span>
+                </div>
+            </j:when>
+            <j:when test="${it.statusChange == 'CLOSED'}">
+                <div style="color:green;">
+                    <div style="display:inline-block; width:20px; padding-left:10px;">-</div>
+                    <span>${it.title}</span>
+                </div>
+            </j:when>
+            <j:when test="${it.statusChange == 'MODIFIED'}">
+                <div style="color:green;">
+                    <div style="display:inline-block; width:20px; padding-left:10px;">~</div>
+                    <span>${it.title}</span>
+                </div>
+            </j:when>
+            <j:when test="${it.statusChange == 'UNCHANGED'}">
+                <div style="color:gray;">
+                    <div style="display:inline-block; width:20px; padding-left:10px;">=</div>
+                    <span>${it.title}</span>
+                </div>
+            </j:when>
+            <j:otherwise>
+                <div style="color:black;">
+                    <div style="display:inline-block; width:20px; padding-left:10px;">?</div>
+                    <span>${it.title}</span>
+                </div>
+            </j:otherwise>
+        </j:choose>
+    </div>
+</j:jelly>

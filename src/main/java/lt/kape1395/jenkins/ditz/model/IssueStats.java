@@ -62,15 +62,6 @@ public class IssueStats {
     }
 
     /**
-     * Checks, if category has no open bugs and 
-     * no bugs was closed recently.
-     * @return true, if category is "interesting"
-     */
-    public boolean isInteresting() {
-        return newIssues != 0 || closedIssues != 0 || openIssues != 0;
-    }
-
-    /**
      * Increment specified field.
      * @param field Field to be incremented.
      */

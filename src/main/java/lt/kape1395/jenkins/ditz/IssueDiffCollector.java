@@ -24,8 +24,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import org.apache.commons.collections.Predicate;
+
 import lt.kape1395.jenkins.ditz.model.Component;
 import lt.kape1395.jenkins.ditz.model.Issue;
+import lt.kape1395.jenkins.ditz.model.IssueOpenPredicate;
 import lt.kape1395.jenkins.ditz.model.IssueStatCategory;
 import lt.kape1395.jenkins.ditz.model.IssueStats;
 import lt.kape1395.jenkins.ditz.model.Project;
@@ -99,6 +102,7 @@ public class IssueDiffCollector implements IssueStatsCollector {
 
         for (String issueId : issueIds) {
             processIssue(
+                    project,
                     sourceIssues.get(issueId), targetIssues.get(issueId),
                     projectStats, releaseStats, componentStats);
         }
@@ -146,6 +150,8 @@ public class IssueDiffCollector implements IssueStatsCollector {
      * Process an issue by updating required statistics of
      * project, release, component, etc.
      *
+     * @param project
+     *      Project for which the statistics are being collected.
      * @param sourceIssue
      *      Issue as it was in the previous build.
      *      It can be null, if not existed.
@@ -160,39 +166,39 @@ public class IssueDiffCollector implements IssueStatsCollector {
      *      Statistics by component.
      */
     protected void processIssue(
+            Project project,
             Issue sourceIssue, Issue targetIssue,
             IssueStatCategory projectStats,
             Map<String, IssueStatCategory> releaseStats,
             Map<String, IssueStatCategory> componentStats) {
         Issue issue;
-        Issue documentIssue = targetIssue;
         IssueStats.StatField statField;
 
         log.fine("processIssue: src=" + sourceIssue + " dst=" + targetIssue);
 
-        if (sourceIssue != null && !sourceIssue.isOpen()) {
-            sourceIssue = null;
-        }
-        if (targetIssue != null && !targetIssue.isOpen()) {
-            targetIssue = null;
+        
+        Predicate issueIsOpen =new IssueOpenPredicate();
+        if (targetIssue != null) {
+            targetIssue.setStatusChange(StatusChange.UNCHANGED);
         }
 
-        if (documentIssue == null) {
-            documentIssue = DUMMY_ISSUE;
-        }
-        documentIssue.setStatusChange(StatusChange.UNCHANGED);
-
-        if (sourceIssue != null && targetIssue != null) {
+        if (issueIsOpen.evaluate(sourceIssue) && issueIsOpen.evaluate(targetIssue)) {
             statField = IssueStats.StatField.OPEN;
             issue = targetIssue;
-        } else if (sourceIssue != null) {
+            issue.setStatusChange(StatusChange.UNCHANGED);
+        } else if (issueIsOpen.evaluate(sourceIssue)) {
             statField = IssueStats.StatField.CLOSED;
             issue = sourceIssue;
-            documentIssue.setStatusChange(StatusChange.CLOSED);
-        } else if (targetIssue != null) {
+            if (targetIssue == null) {
+                issue.setStatusChange(StatusChange.CLOSED);
+                project.getIssues().add(issue);
+            } else {
+                targetIssue.setStatusChange(StatusChange.CLOSED);
+            }
+        } else if (issueIsOpen.evaluate(targetIssue)) {
             statField = IssueStats.StatField.NEW;
             issue = targetIssue;
-            documentIssue.setStatusChange(StatusChange.NEW);
+            issue.setStatusChange(StatusChange.NEW);
         } else {
             return;
         }

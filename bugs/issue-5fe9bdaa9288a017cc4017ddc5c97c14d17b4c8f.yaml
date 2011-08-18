@@ -1,22 +1,22 @@
 --- !ditz.rubyforge.org,2008-03-06/issue 
-title: Create icon for the action.
+title: Move Issue::isOpen to a predicate.
 desc: ""
 type: :task
 component: jenkins-ditz-plugin
-release: 
+release: 0.1.0
 reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
 status: :closed
-disposition: :wontfix
-creation_time: 2011-05-23 20:35:43.451928 Z
+disposition: :fixed
+creation_time: 2011-08-18 21:12:39.969682 Z
 references: []
 
-id: b90ace4d586fee1c314f8f4c2ee67f8040a3c1c5
+id: 5fe9bdaa9288a017cc4017ddc5c97c14d17b4c8f
 log_events: 
-- - 2011-05-23 20:35:44.347342 Z
+- - 2011-08-18 21:12:41.293653 Z
   - Karolis Petrauskas <k.petrauskas@gmail.com>
   - created
   - ""
-- - 2011-08-18 23:21:54.733682 Z
+- - 2011-08-18 23:21:00.477674 Z
   - Karolis Petrauskas <k.petrauskas@gmail.com>
-  - closed with disposition wontfix
+  - closed with disposition fixed
   - ""

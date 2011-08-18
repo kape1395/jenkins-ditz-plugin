@@ -10,24 +10,23 @@
     <l:layout norefresh="true">
         <l:main-panel>
             <h1>${%heading}</h1>
-                <j:forEach var="r" items="${it.project.releases}">
-                    <j:set var="rStat" value="${r.issueStats}"/>
-                    <j:if test="${rStat.interesting}">
-                        <h2>
-                            ${r.name}:<st:nbsp/>
-                            ${rStat.openIssues}<st:nbsp/>(-${rStat.closedIssues},<st:nbsp/>+${rStat.newIssues})
-                        </h2>
-                    </j:if>
-                </j:forEach>
-                <!--
-                <j:set var="unassignedIssues" value="${it.unassignedIssues}"/>
-                <j:if test="${!unassignedIssues.empty}">
+                <j:forEach var="r" items="${it.activeReleases}">
                     <h2>
-                        ${r.name}:<st:nbsp/>
-                        ${rStat.openIssues}<st:nbsp/>(-${rStat.closedIssues},<st:nbsp/>+${rStat.newIssues})
+                        <st:include it="${r}" page="release.jelly" />
                     </h2>
+                    <j:forEach var="i" items="${it.getActiveReleaseIssues(r)}">
+                        <st:include it="${i}" page="issue.jelly"/>
+                    </j:forEach>
+                </j:forEach>
+                <j:set var="unassignedIssues" value="${it.activeUnassignedIssues}"/>
+                <j:if test="${!unassignedIssues.isEmpty()}">
+                    <h2>
+                        Unassigned
+                    </h2>
+                    <j:forEach var="i" items="${unassignedIssues}">
+                        <st:include it="${i}" page="issue.jelly"/>
+                    </j:forEach>
                 </j:if>
-                -->
         </l:main-panel>
     </l:layout>
 </j:jelly>

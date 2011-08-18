@@ -21,6 +21,10 @@ Design decisions
    - Installation of the plugin will be easier. Wil be no dependency on ditz.
    - ditz program looks a bit to interactive (e.g. tries to create .ditz-config).
 
+ * Separate object selectors from the data objects (persisted using xstreams).
+   - To avoid serialization of "derived" getters.
+   - Composition is better than additional methods or inheritance.
+     We vill use commons collections for selecting needed objects.
 
 Some commands for development
 =============================

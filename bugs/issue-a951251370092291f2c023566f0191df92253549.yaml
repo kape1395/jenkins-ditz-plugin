@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Something is wrong with diff calculator.
+desc: ""
+type: :task
+component: jenkins-ditz-plugin
+release: 0.1.0
+reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
+status: :unstarted
+disposition: 
+creation_time: 2011-08-18 23:16:07.585688 Z
+references: []
+
+id: a951251370092291f2c023566f0191df92253549
+log_events: 
+- - 2011-08-18 23:16:08.357647 Z
+  - Karolis Petrauskas <k.petrauskas@gmail.com>
+  - created
+  - ""

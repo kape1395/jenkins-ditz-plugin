@@ -97,14 +97,6 @@ public class Issue {
     }
 
     /**
-     * Is the issue considered open?
-     * @return true, if issue is open.
-     */
-    public boolean isOpen() {
-        return statusName != null && !statusName.equalsIgnoreCase(Status.CLOSED.toString());
-    }
-
-    /**
      * Returns the issue as human-readable string.
      * @return Issue as a string.
      */
