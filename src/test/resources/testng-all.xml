@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TestSuite" verbose="1">
+    <test name="Test">
+        <packages>
+            <package name="lt.kape1395.jenkins.ditz"/>
+            <package name="lt.kape1395.jenkins.ditz.yaml"/>
+        </packages>
+    </test>
+</suite>

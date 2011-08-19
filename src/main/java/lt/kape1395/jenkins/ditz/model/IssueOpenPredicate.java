@@ -37,8 +37,6 @@ public class IssueOpenPredicate implements Predicate {
             return false;
         }
         Issue issue = (Issue) object;
-        System.out.println("issue=" + issue + " ---OPEN---> " +
-                (!StringUtils.equalsIgnoreCase(issue.getStatusName(), Issue.Status.CLOSED.toString())))    ;
         return !StringUtils.equalsIgnoreCase(issue.getStatusName(), Issue.Status.CLOSED.toString());
     }
 
