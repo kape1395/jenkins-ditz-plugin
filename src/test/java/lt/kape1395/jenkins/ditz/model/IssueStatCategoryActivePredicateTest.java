@@ -18,28 +18,12 @@
  */
 package lt.kape1395.jenkins.ditz.model;
 
-import lt.kape1395.jenkins.ditz.model.Issue.StatusChange;
+import org.testng.annotations.Test;
 
-import org.apache.commons.collections.Predicate;
+public class IssueStatCategoryActivePredicateTest {
 
-/**
- * Checks if issue was active in this build (created or closed).
- * @author k.petrauskas
- */
-public class IssueActivePredicate implements Predicate {
-	
-	private static Predicate issueIsOpen = new IssueOpenPredicate();
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public boolean evaluate(Object object) {
-		if (!(object instanceof Issue)) {
-			return false;
-		}
-		Issue issue = (Issue) object;
-		Issue.StatusChange ss = issue.getStatusChange();
-		return (ss != null && ss != StatusChange.UNCHANGED) || issueIsOpen.evaluate(issue);
-	}
-
+    @Test
+    public void evaluate() {
+        throw new RuntimeException("Test not implemented");
+    }
 }

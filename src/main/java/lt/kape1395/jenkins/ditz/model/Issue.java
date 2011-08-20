@@ -76,6 +76,7 @@ public class Issue {
         this.statusName = statusName;
         this.releaseName = releaseName;
         this.componentName = componentName;
+        this.statusChange = StatusChange.UNCHANGED;
     }
 
     /**
@@ -89,11 +90,21 @@ public class Issue {
     public Issue(
             String id, String title, String typeName,
             String statusName, String releaseName) {
-        this.id = id;
-        this.title = title;
-        this.typeName = typeName;
-        this.statusName = statusName;
-        this.releaseName = releaseName;
+        this(id, title, typeName, statusName, releaseName, null);
+    }
+
+    /**
+     * Constructor.
+     * @param id Id.
+     * @param title Title.
+     * @param typeName Type.
+     * @param status Status.
+     * @param releaseName Release.
+     */
+    public Issue(
+            String id, String title, String typeName,
+            Status status, String releaseName) {
+        this(id, title, typeName, status.toString(), releaseName);
     }
 
     /**
@@ -107,6 +118,8 @@ public class Issue {
                 + " status=" + statusName
                 + " release=" + releaseName
                 + " component=" + componentName
+                + " statusChange=" + statusChange
+                + " title=" + title
                 + ")";
     }
 

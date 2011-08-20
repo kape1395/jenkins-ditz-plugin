@@ -18,45 +18,32 @@
  */
 package lt.kape1395.jenkins.ditz.model;
 
+import lt.kape1395.jenkins.ditz.model.Issue.Status;
+
 import org.apache.commons.collections.Predicate;
-import org.apache.commons.lang3.StringUtils;
+import org.testng.annotations.Test;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 /**
- * Checks if issue is assigned to the specified release.
+ * Tests for {@link IssueOpenPredicate}.
  * @author k.petrauskas
  */
-public class IssueInReleasePredicate implements Predicate {
-	private Release release;
-	
-	/**
-	 * Constructor. 
-	 * @param release Release to find issues assigned to.
-	 * 		If release is null, unassigned predicates are returned.
-	 */
-	public IssueInReleasePredicate(Release release) {
-		this.release = release;
-	}
-	
-	/**
-	 * Constructor assuming release = null.
-	 */
-	public IssueInReleasePredicate() {
-	    this(null);
-	}
+public class IssueOpenPredicateTest {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public boolean evaluate(Object object) {
-		if (object == null || !(object instanceof Issue)) {
-			return false;
-		}
-		Issue issue = (Issue) object;
-		if (release == null || StringUtils.isEmpty(release.getName())) {
-            return StringUtils.isEmpty(issue.getReleaseName());
-		} else {
-            return release.getName().equals(issue.getReleaseName());
-		}
-	}
+    /**
+     * By all statuses. 
+     */
+    @Test
+    public void testEevaluate() {
+        Predicate p = new IssueOpenPredicate();
+        
+        assertThat(p.evaluate(new Issue("a", "b", "c", Status.CLOSED, "d")), is(false));
+        assertThat(p.evaluate(new Issue("a", "b", "c", Status.IN_PROGRESS, "d")), is(true));
+        assertThat(p.evaluate(new Issue("a", "b", "c", Status.PAUSED, "d")), is(true));
+        assertThat(p.evaluate(new Issue("a", "b", "c", Status.UNSTARTED, "d")), is(true));
+        assertThat(p.evaluate(new Issue("a", "b", "c", "some", "d")), is(true));
+    }
 
 }

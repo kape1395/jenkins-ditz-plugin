@@ -4,6 +4,7 @@
     <test name="Test">
         <packages>
             <package name="lt.kape1395.jenkins.ditz"/>
+            <package name="lt.kape1395.jenkins.ditz.model"/>
             <package name="lt.kape1395.jenkins.ditz.yaml"/>
         </packages>
     </test>
