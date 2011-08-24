@@ -38,3 +38,10 @@ To check code quality:
  * Checkstyle: mvn checkstyle:checkstyle
  * PMD:        mvn pmd:pmd
  * FindBugs:   mvn site && mvn findbugs:gui
+
+To perform a release:
+ * mvn release:prepare -DdryRun=true
+ * mvn release:clean
+ * mvn release:prepare
+ * mvn release:clean
+
