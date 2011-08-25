@@ -19,11 +19,46 @@
 package lt.kape1395.jenkins.ditz.model;
 
 import org.testng.annotations.Test;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
+/**
+ * Test cases for {@link IssueStatCategory}.
+ * @author k.petrauskas
+ */
 public class IssueStatCategoryActivePredicateTest {
 
+    /**
+     * Test all cases.
+     */
     @Test
-    public void evaluate() {
-        throw new RuntimeException("Test not implemented");
+    public void testEvaluate() {
+        IssueStatCategoryActivePredicate p = new IssueStatCategoryActivePredicate();
+        IssueStatCategory c = mock(IssueStatCategory.class);
+        IssueStats s = new IssueStats();
+        when(c.getIssueStats()).thenReturn(s);
+
+        s.setStats(0, 0, 0); // open, new, closed
+        assertThat(p.evaluate(c), is(false));
+
+        s.setStats(1, 0, 0);
+        assertThat(p.evaluate(c), is(true));
+
+        s.setStats(0, 1, 0);
+        assertThat(p.evaluate(c), is(true));
+
+        s.setStats(0, 0, 1);
+        assertThat(p.evaluate(c), is(true));
+
+        s.setStats(1, 1, 1);
+        assertThat(p.evaluate(c), is(true));
+
+        s.setStats(0, 1, 1);
+        assertThat(p.evaluate(c), is(true));
+        
+        assertThat(p.evaluate(new Object()), is(false));
+        assertThat(p.evaluate(null), is(false));
     }
 }

@@ -5,7 +5,7 @@ type: :task
 component: jenkins-ditz-plugin
 release: 0.1.0
 reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
-status: :unstarted
+status: :in_progress
 disposition: 
 creation_time: 2011-08-19 18:34:13.993685 Z
 references: []
@@ -15,4 +15,8 @@ log_events:
 - - 2011-08-19 18:34:14.765659 Z
   - Karolis Petrauskas <k.petrauskas@gmail.com>
   - created
+  - ""
+- - 2011-08-25 18:19:01.125691 Z
+  - Karolis Petrauskas <k.petrauskas@gmail.com>
+  - changed status from unstarted to in_progress
   - ""

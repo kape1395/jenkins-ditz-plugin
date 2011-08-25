@@ -26,7 +26,7 @@ import lt.kape1395.jenkins.ditz.model.Project;
 
 import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
 
 /**
  * Test case for {@link DitzBugsDirReader}.

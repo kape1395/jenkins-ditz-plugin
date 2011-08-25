@@ -27,7 +27,11 @@ import lt.kape1395.jenkins.ditz.model.Project;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
 import org.yaml.snakeyaml.Yaml;
 
 /**
