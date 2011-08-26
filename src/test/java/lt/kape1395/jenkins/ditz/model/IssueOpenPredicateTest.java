@@ -24,7 +24,7 @@ import org.apache.commons.collections.Predicate;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
 
 /**
  * Tests for {@link IssueOpenPredicate}.
