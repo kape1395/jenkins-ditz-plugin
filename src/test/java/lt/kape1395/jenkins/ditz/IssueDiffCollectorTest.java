@@ -20,6 +20,7 @@ package lt.kape1395.jenkins.ditz;
 
 import lt.kape1395.jenkins.ditz.model.Component;
 import lt.kape1395.jenkins.ditz.model.Issue;
+import lt.kape1395.jenkins.ditz.model.Issue.StatusChange;
 import lt.kape1395.jenkins.ditz.model.Project;
 import lt.kape1395.jenkins.ditz.model.Release;
 
@@ -41,6 +42,9 @@ public class IssueDiffCollectorTest {
     private Issue issue2;
     private Issue issue3;
 
+    /**
+     * Setup tests.
+     */
     @BeforeMethod
     public void beforeMethod() {
         project = createProjectTemplate();
@@ -50,6 +54,10 @@ public class IssueDiffCollectorTest {
         issue3 = new Issue("id3", "title3", ":type3", Issue.Status.UNSTARTED.toString(), "r2", "c1");
     }
 
+    /**
+     * Creates almost empty project.
+     * @return
+     */
     public Project createProjectTemplate() {
         Project project = new Project();
         project.setName("a");
@@ -62,7 +70,9 @@ public class IssueDiffCollectorTest {
     }
 
     /**
-     *
+     *  Test the case, when difference is made with no base specified (i.e. from zero).
+     *  This situation will always be the case, when this plugin will be invoked first
+     *  time on a particular project.
      */
     @Test
     public void testNoBase() throws Exception {
@@ -81,8 +91,18 @@ public class IssueDiffCollectorTest {
         assertThat(project.getComponents().get(0).getIssueStats().getNewIssues(), is(1));
         assertThat(project.getComponents().get(1).getIssueStats().getNewIssues(), is(0));
         assertThat(project.getComponents().get(2).getIssueStats().getNewIssues(), is(0));
+        
+        assertThat(project.getIssues().size(), is(3));
+        assertThat(project.getIssues().get(0).getStatusChange(), is(StatusChange.NEW));
+        assertThat(project.getIssues().get(1).getStatusChange(), is(StatusChange.NEW));
+        assertThat(project.getIssues().get(2).getStatusChange(), is(StatusChange.NEW));
     }
 
+    /**
+     * Compare two equal projects.
+     *
+     * @throws Exception
+     */
     @Test
     public void testNoDifferences() throws Exception {
         base.getIssues().add(issue1);
@@ -107,10 +127,15 @@ public class IssueDiffCollectorTest {
         assertThat(project.getComponents().get(0).getIssueStats().getOpenIssues(), is(1));
         assertThat(project.getComponents().get(1).getIssueStats().getOpenIssues(), is(0));
         assertThat(project.getComponents().get(2).getIssueStats().getOpenIssues(), is(0));
+        
+        assertThat(project.getIssues().size(), is(3));
+        assertThat(project.getIssues().get(0).getStatusChange(), is(StatusChange.UNCHANGED));
+        assertThat(project.getIssues().get(1).getStatusChange(), is(StatusChange.UNCHANGED));
+        assertThat(project.getIssues().get(2).getStatusChange(), is(StatusChange.UNCHANGED));
     }
 
     /**
-     *
+     * Test differences with one fixed, one new and one active but unchanged issues.
      * @throws Exception
      */
     @Test
@@ -138,5 +163,32 @@ public class IssueDiffCollectorTest {
         assertThat(project.getComponents().get(0).getIssueStats().getNewIssues(), is(1));
         assertThat(project.getComponents().get(0).getIssueStats().getOpenIssues(), is(1));
         assertThat(project.getComponents().get(0).getIssueStats().getClosedIssues(), is(0));
+
+        assertThat(project.getIssues().size(), is(3));
+        assertThat(issue1.getStatusChange(), is(StatusChange.CLOSED));
+        assertThat(issue2.getStatusChange(), is(StatusChange.UNCHANGED));
+        assertThat(issue3.getStatusChange(), is(StatusChange.NEW));
+    }
+
+    /**
+     * Check is old non-open issues are removed from the target project.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testIfAllUnusedIssuesRemoved() throws Exception {
+        Issue issue1a = new Issue("id1", "title1", ":type1", Issue.Status.CLOSED.toString(), "r1");
+        Issue issue2a = new Issue("id2", "title2", ":type2", Issue.Status.CLOSED.toString(), "r1");
+        base.getIssues().add(issue1a);
+        base.getIssues().add(issue2a);
+        base.getIssues().add(issue3);
+        project.getIssues().add(issue2a);
+        project.getIssues().add(issue3);
+
+        IssueDiffCollector instance = new IssueDiffCollector(base);
+        instance.collectStatistics(project);
+
+        assertThat(project.getIssues().size(), is(1));
+        assertThat(issue3.getStatusChange(), is(StatusChange.UNCHANGED));
     }
 }

@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Maybe implement adding of issues via Jenkins.
+desc: |-
+  It would be WEB gui for entering bugs for projects, where not only
+  developers are allowed to do this.
+type: :feature
+component: jenkins-ditz-plugin
+release: 
+reporter: Karolis Petrauskas <k.petrauskas@omnitel.net>
+status: :unstarted
+disposition: 
+creation_time: 2011-08-27 16:39:35.243253 Z
+references: []
+
+id: 876236ba5818acb2b2d307d8b34da21ee77fc11f
+log_events: 
+- - 2011-08-27 16:39:36.275156 Z
+  - Karolis Petrauskas <k.petrauskas@omnitel.net>
+  - created
+  - ""

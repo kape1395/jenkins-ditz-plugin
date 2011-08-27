@@ -51,11 +51,6 @@ public class IssueDiffCollector implements IssueStatsCollector {
     private static Logger log = Logger.getLogger(IssueDiffCollector.class.getName());
 
     /**
-     * Just to have less of if's in the code.
-     */
-    private static final Issue DUMMY_ISSUE = new Issue("id", "title", "dummyType", "dummyStatus", null);
-    
-    /**
      * Previous project (to compare with).
      */
     private Project baseProject;
@@ -177,7 +172,7 @@ public class IssueDiffCollector implements IssueStatsCollector {
         log.fine("processIssue: src=" + sourceIssue + " dst=" + targetIssue);
 
         
-        Predicate issueIsOpen =new IssueOpenPredicate();
+        Predicate issueIsOpen = new IssueOpenPredicate();
         if (targetIssue != null) {
             targetIssue.setStatusChange(StatusChange.UNCHANGED);
         }
@@ -200,7 +195,8 @@ public class IssueDiffCollector implements IssueStatsCollector {
             issue = targetIssue;
             issue.setStatusChange(StatusChange.NEW);
         } else {
-            return;
+            project.getIssues().remove(targetIssue);
+            return; // statistics should not be affected.
         }
 
         log.fine("processIssue: stat=" + statField + " " + issue);
