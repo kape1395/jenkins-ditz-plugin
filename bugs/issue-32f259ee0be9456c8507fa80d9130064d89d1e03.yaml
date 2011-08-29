@@ -1,22 +1,22 @@
 --- !ditz.rubyforge.org,2008-03-06/issue 
-title: Attach actions to builds.
+title: Total number of bugs is invalid.
 desc: ""
 type: :task
 component: jenkins-ditz-plugin
 release: 0.1.0
 reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
 status: :closed
-disposition: :fixed
-creation_time: 2011-08-18 21:42:33.897685 Z
+disposition: :wontfix
+creation_time: 2011-08-29 21:16:02.469726 Z
 references: []
 
-id: e19067bb241bafe7cbd7587039e874469ef0753a
+id: 32f259ee0be9456c8507fa80d9130064d89d1e03
 log_events: 
-- - 2011-08-18 21:42:35.041681 Z
+- - 2011-08-29 21:16:03.581631 Z
   - Karolis Petrauskas <k.petrauskas@gmail.com>
   - created
   - ""
-- - 2011-08-29 22:02:46.233652 Z
+- - 2011-08-29 22:03:33.365661 Z
   - Karolis Petrauskas <k.petrauskas@gmail.com>
-  - closed with disposition fixed
-  - Actions are now attached to builds.
+  - closed with disposition wontfix
+  - Test data was invalid (bad release number in the issue).

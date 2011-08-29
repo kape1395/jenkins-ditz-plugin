@@ -32,6 +32,7 @@ import lt.kape1395.jenkins.ditz.model.Project;
 import lt.kape1395.jenkins.ditz.model.Release;
 
 import hudson.model.AbstractBuild;
+import hudson.model.AbstractProject;
 import hudson.model.Action;
 
 /**
@@ -53,22 +54,36 @@ public class DitzPublisherAction implements Action {
     private static final String URL_NAME = "ditz";
 
     /**
-     * Current build.
+     * non-null, if this is a build action.
      */
-    private AbstractBuild<?, ?> owner;
+    private AbstractBuild<?, ?> jenkinsBuild;
+    
+    /**
+     * non-null, if this is a project action. 
+     */
+    private AbstractProject<?, ?> jenkinsProject;
 
     /**
-     * Current project.
+     * Current ditz project diff.
      */
     private Project project;
 
     /**
-     * Constructor.
+     * Constructor for the build action.
      * @param owner Last build. It is used to load ditz data.
      */
-    public DitzPublisherAction(AbstractBuild<?, ?> owner) {
-        this.owner = owner;
+    public DitzPublisherAction(AbstractBuild<?, ?> jenkinsBuild) {
+        this.jenkinsBuild = jenkinsBuild;
     }
+    
+    /**
+     * Constructor for the project action.
+     * @param jenkinsProject Jenkins project.
+     */
+    public DitzPublisherAction(AbstractProject<?, ?> jenkinsProject) {
+        this.jenkinsProject = jenkinsProject;
+    }
+    
 
     /**
      * Name for the action.
@@ -100,7 +115,7 @@ public class DitzPublisherAction implements Action {
      * @return Project data.
      */
     public Project getProject() {
-        if (project == null) {
+        if (project == null || jenkinsBuild == null) {
             try {
                 project = loadProject();
             } catch (Exception e) {
@@ -118,8 +133,15 @@ public class DitzPublisherAction implements Action {
      * @throws Exception if project cannot be loaded.
      */
     protected Project loadProject() throws Exception {
-        if (owner == null) {
-            throw new Exception("No last build exist.");
+        if (jenkinsBuild == null && jenkinsProject == null) {
+            throw new Exception("No last build and current project exist.");
+        }
+        
+        AbstractBuild<?, ?> owner;
+        if (jenkinsBuild != null) {
+            owner = jenkinsBuild;
+        } else {
+            owner = jenkinsProject.getLastBuild();
         }
 
         File projectFile = new File(owner.getRootDir(), DitzPublisher.DITZ_PROJECT_FILE);

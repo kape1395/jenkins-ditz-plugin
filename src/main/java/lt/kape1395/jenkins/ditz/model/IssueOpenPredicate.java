@@ -18,6 +18,8 @@
  */
 package lt.kape1395.jenkins.ditz.model;
 
+import lt.kape1395.jenkins.ditz.model.Issue.StatusChange;
+
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.lang3.StringUtils;
 
@@ -37,7 +39,9 @@ public class IssueOpenPredicate implements Predicate {
             return false;
         }
         Issue issue = (Issue) object;
-        return !StringUtils.equalsIgnoreCase(issue.getStatusName(), Issue.Status.CLOSED.toString());
+        boolean statusClosed = StringUtils.equalsIgnoreCase(issue.getStatusName(), Issue.Status.CLOSED.toString());
+        boolean actionClosed = issue.getStatusChange() != null && issue.getStatusChange().equals(StatusChange.CLOSED);
+        return !statusClosed && !actionClosed;
     }
 
 }

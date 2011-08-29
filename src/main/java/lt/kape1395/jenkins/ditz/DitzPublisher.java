@@ -63,7 +63,7 @@ public class DitzPublisher extends Recorder {
     /**
      * Default name for an internal ditz project file.
      */
-    public static final String DITZ_PROJECT_FILE = "ditzProject.xml";
+    public static final String DITZ_PROJECT_FILE = "ditz.diff.xml";
 
     /**
      * Ditz bugs directory.
@@ -136,6 +136,8 @@ public class DitzPublisher extends Recorder {
 
             statsCollector.collectStatistics(project);
             new XStreamDataSerializer(new File(ditzXmlFile.toURI())).saveProject(project);
+            
+            build.addAction(new DitzPublisherAction(build));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -186,7 +188,7 @@ public class DitzPublisher extends Recorder {
          * @throws ServletException is not thrown.
          * @throws IOException is not thrown.
          */
-        @SuppressWarnings("unchecked")
+        @SuppressWarnings("rawtypes")
         public FormValidation doCheckBugsDir(
                 @AncestorInPath AbstractProject project,
                 @QueryParameter String value) throws IOException, ServletException {
@@ -208,20 +210,22 @@ public class DitzPublisher extends Recorder {
          * @param jobType Type of the current job.
          * @return true.
          */
-        @SuppressWarnings("unchecked")
+        @SuppressWarnings("rawtypes")
         public boolean isApplicable(Class<? extends AbstractProject> jobType) {
             return true;
         }
     }
 
     /* ********************************************************************* */
-    /**
+    /*
      * Returns all provided actions.
      * @param project Current project.
      * @return All provided actions.
      */
     @Override
     public Collection<? extends Action> getProjectActions(AbstractProject<?, ?> project) {
-        return Collections.<Action>singleton(new DitzPublisherAction(project.getLastBuild()));
+        log.fine("DitzPublisher::getProjectActions()");
+        return Collections.singleton(new DitzPublisherAction(project));
     }
+
 }

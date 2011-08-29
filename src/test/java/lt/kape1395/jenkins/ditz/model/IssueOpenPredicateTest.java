@@ -19,6 +19,7 @@
 package lt.kape1395.jenkins.ditz.model;
 
 import lt.kape1395.jenkins.ditz.model.Issue.Status;
+import lt.kape1395.jenkins.ditz.model.Issue.StatusChange;
 
 import org.apache.commons.collections.Predicate;
 import org.testng.annotations.Test;
@@ -36,7 +37,7 @@ public class IssueOpenPredicateTest {
      * By all statuses. 
      */
     @Test
-    public void testEevaluate() {
+    public void testEvaluate() {
         Predicate p = new IssueOpenPredicate();
         
         assertThat(p.evaluate(new Issue("a", "b", "c", Status.CLOSED, "d")), is(false));
@@ -44,6 +45,42 @@ public class IssueOpenPredicateTest {
         assertThat(p.evaluate(new Issue("a", "b", "c", Status.PAUSED, "d")), is(true));
         assertThat(p.evaluate(new Issue("a", "b", "c", Status.UNSTARTED, "d")), is(true));
         assertThat(p.evaluate(new Issue("a", "b", "c", "some", "d")), is(true));
+    }
+
+    /**
+     * If issue was not closed but removed, it stays with the active status,
+     * but statusChange is recorded correctly. To determine, if issue is active,
+     * one should look at both statuses.
+     */
+    @Test
+    public void testPreviouslyDeletedIssues() {
+        Predicate p = new IssueOpenPredicate();
+        
+        Issue i;
+        i = new Issue("a", "b", "c", Status.CLOSED, "d");
+        i.setStatusChange(StatusChange.CLOSED);
+        assertThat(p.evaluate(i), is(false));
+        
+        i = new Issue("a", "b", "c", Status.IN_PROGRESS, "d");
+        i.setStatusChange(StatusChange.CLOSED);
+        assertThat(p.evaluate(i), is(false));
+        
+        i = new Issue("a", "b", "c", Status.PAUSED, "d");
+        i.setStatusChange(StatusChange.CLOSED);
+        assertThat(p.evaluate(i), is(false));
+        
+        i = new Issue("a", "b", "c", Status.UNSTARTED, "d");
+        i.setStatusChange(StatusChange.CLOSED);
+        assertThat(p.evaluate(i), is(false));
+        
+        i = new Issue("a", "b", "c", "some", "d");
+        i.setStatusChange(StatusChange.CLOSED);
+        assertThat(p.evaluate(i), is(false));
+        
+        i = new Issue("a", "b", "c", Status.IN_PROGRESS, "d");
+        i.setStatusChange(StatusChange.NEW);
+        assertThat(p.evaluate(i), is(true));
+        
     }
 
 }
