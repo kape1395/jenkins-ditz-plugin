@@ -7,10 +7,23 @@ components:
 releases: 
 - !ditz.rubyforge.org,2008-03-06/release 
   name: 0.1.0
+  status: :released
+  release_time: 2011-08-29 22:54:53.489963 Z
+  log_events: 
+  - - 2011-04-24 21:47:14.662125 Z
+    - Karolis Petrauskas <k.petrauskas@gmail.com>
+    - created
+    - ""
+  - - 2011-08-29 22:54:53.489975 Z
+    - Karolis Petrauskas <k.petrauskas@gmail.com>
+    - released
+    - Main functionality is done.
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: 1.0.0
   status: :unreleased
   release_time: 
   log_events: 
-  - - 2011-04-24 21:47:14.662125 Z
+  - - 2011-08-29 22:53:59.261663 Z
     - Karolis Petrauskas <k.petrauskas@gmail.com>
     - created
     - ""

@@ -5,7 +5,7 @@ desc: |-
   Add some utility methods to handle tuple nodes.
 type: :task
 component: jenkins-ditz-plugin
-release: 0.1.0
+release: 1.0.0
 reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
 status: :unstarted
 disposition: 
@@ -17,4 +17,8 @@ log_events:
 - - 2011-04-28 00:35:47.054066 Z
   - Karolis Petrauskas <k.petrauskas@gmail.com>
   - created
+  - ""
+- - 2011-08-29 22:54:27.197680 Z
+  - Karolis Petrauskas <k.petrauskas@gmail.com>
+  - assigned to release 1.0.0 from 0.1.0
   - ""
