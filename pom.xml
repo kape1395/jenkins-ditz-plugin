@@ -19,7 +19,7 @@
 
     <scm>
         <connection>scm:git:https://github.com/kape1395/jenkins-ditz-plugin.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:kape1395/jenkins-ditz-plugin.git</developerConnection>
+        <developerConnection>scm:git:ssh://git@github.com/kape1395/jenkins-ditz-plugin.git</developerConnection>
         <url>https://github.com/kape1395/jenkins-ditz-plugin</url>
     </scm>
 
