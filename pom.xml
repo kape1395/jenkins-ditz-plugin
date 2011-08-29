@@ -10,7 +10,7 @@
     <groupId>lt.kape1395</groupId>
     <artifactId>jenkins.ditz.plugin</artifactId>
     <name>Ditz Plugin</name>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
     <packaging>hpi</packaging>
 
     <prerequisites>
