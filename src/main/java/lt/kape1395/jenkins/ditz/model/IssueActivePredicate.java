@@ -27,19 +27,22 @@ import org.apache.commons.collections.Predicate;
  * @author k.petrauskas
  */
 public class IssueActivePredicate implements Predicate {
-	
-	private static Predicate issueIsOpen = new IssueOpenPredicate();
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public boolean evaluate(Object object) {
-		if (!(object instanceof Issue)) {
-			return false;
-		}
-		Issue issue = (Issue) object;
-		Issue.StatusChange ss = issue.getStatusChange();
-		return (ss != null && ss != StatusChange.UNCHANGED) || issueIsOpen.evaluate(issue);
-	}
+    /**
+     * Used to check, if issue is open.
+     */
+    private static Predicate issueIsOpen = new IssueOpenPredicate();
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean evaluate(Object object) {
+        if (!(object instanceof Issue)) {
+            return false;
+        }
+        Issue issue = (Issue) object;
+        Issue.StatusChange ss = issue.getStatusChange();
+        return (ss != null && ss != StatusChange.UNCHANGED) || issueIsOpen.evaluate(issue);
+    }
 
 }

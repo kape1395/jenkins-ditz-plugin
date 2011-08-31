@@ -136,7 +136,7 @@ public class DitzPublisher extends Recorder {
 
             statsCollector.collectStatistics(project);
             new XStreamDataSerializer(new File(ditzXmlFile.toURI())).saveProject(project);
-            
+
             build.addAction(new DitzPublisherAction(build));
         } catch (Exception e) {
             e.printStackTrace();

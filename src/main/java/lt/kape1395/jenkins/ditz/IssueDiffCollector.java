@@ -171,7 +171,6 @@ public class IssueDiffCollector implements IssueStatsCollector {
 
         log.fine("processIssue: src=" + sourceIssue + " dst=" + targetIssue);
 
-        
         Predicate issueIsOpen = new IssueOpenPredicate();
         if (targetIssue != null) {
             targetIssue.setStatusChange(StatusChange.UNCHANGED);

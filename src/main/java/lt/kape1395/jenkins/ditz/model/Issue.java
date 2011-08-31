@@ -52,9 +52,9 @@ public class Issue {
      * String representation of issue component.
      */
     private String componentName;
-    
+
     /**
-     * 
+     * Indicates status change, occurred in this build.
      */
     private StatusChange statusChange;
 
@@ -154,7 +154,7 @@ public class Issue {
     public String getStatusName() {
         return statusName;
     }
-    
+
     /**
      * Returns a status change recorded for a particular build.
      * @return status change indicator.
@@ -232,7 +232,7 @@ public class Issue {
     }
 
     /**
-     *  Lists status changes, that can be recorded for a particular build. 
+     *  Lists status changes, that can be recorded for a particular build.
      */
     public static enum StatusChange {
         /**

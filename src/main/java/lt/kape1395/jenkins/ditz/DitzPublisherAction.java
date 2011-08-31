@@ -57,9 +57,9 @@ public class DitzPublisherAction implements Action {
      * non-null, if this is a build action.
      */
     private AbstractBuild<?, ?> jenkinsBuild;
-    
+
     /**
-     * non-null, if this is a project action. 
+     * non-null, if this is a project action.
      */
     private AbstractProject<?, ?> jenkinsProject;
 
@@ -70,12 +70,12 @@ public class DitzPublisherAction implements Action {
 
     /**
      * Constructor for the build action.
-     * @param owner Last build. It is used to load ditz data.
+     * @param jenkinsBuild Last build. It is used to load ditz data.
      */
     public DitzPublisherAction(AbstractBuild<?, ?> jenkinsBuild) {
         this.jenkinsBuild = jenkinsBuild;
     }
-    
+
     /**
      * Constructor for the project action.
      * @param jenkinsProject Jenkins project.
@@ -83,7 +83,7 @@ public class DitzPublisherAction implements Action {
     public DitzPublisherAction(AbstractProject<?, ?> jenkinsProject) {
         this.jenkinsProject = jenkinsProject;
     }
-    
+
 
     /**
      * Name for the action.
@@ -136,7 +136,7 @@ public class DitzPublisherAction implements Action {
         if (jenkinsBuild == null && jenkinsProject == null) {
             throw new Exception("No last build and current project exist.");
         }
-        
+
         AbstractBuild<?, ?> owner;
         if (jenkinsBuild != null) {
             owner = jenkinsBuild;
@@ -161,26 +161,25 @@ public class DitzPublisherAction implements Action {
         return CollectionUtils.select(getProject().getReleases(),
                 new IssueStatCategoryActivePredicate());
     }
-    
+
     /**
-     * 
-     * @param release
-     * @return
+     * Used from UI.
+     * @param release Release to get issues for.
+     * @return Issues.
      */
     @SuppressWarnings("rawtypes")
     public Collection getActiveReleaseIssues(Release release) {
         return CollectionUtils.select(getProject().getIssues(),
                 new AndPredicate(new IssueInReleasePredicate(release), new IssueActivePredicate()));
     }
-    
+
     /**
-     * 
-     * @param release
-     * @return
+     * Used from UI.
+     * @return Unassigned issues.
      */
     @SuppressWarnings("rawtypes")
     public Collection getActiveUnassignedIssues() {
-    	return getActiveReleaseIssues(null);
+        return getActiveReleaseIssues(null);
     }
-    
+
 }

@@ -26,37 +26,40 @@ import org.apache.commons.lang3.StringUtils;
  * @author k.petrauskas
  */
 public class IssueInReleasePredicate implements Predicate {
-	private Release release;
-	
-	/**
-	 * Constructor. 
-	 * @param release Release to find issues assigned to.
-	 * 		If release is null, unassigned predicates are returned.
-	 */
-	public IssueInReleasePredicate(Release release) {
-		this.release = release;
-	}
-	
-	/**
-	 * Constructor assuming release = null.
-	 */
-	public IssueInReleasePredicate() {
-	    this(null);
-	}
+    /**
+     * Release to be considered.
+     */
+    private Release release;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public boolean evaluate(Object object) {
-		if (object == null || !(object instanceof Issue)) {
-			return false;
-		}
-		Issue issue = (Issue) object;
-		if (release == null || StringUtils.isEmpty(release.getName())) {
+    /**
+     * Constructor.
+     * @param release Release to find issues assigned to.
+     *         If release is null, unassigned issues are "returned".
+     */
+    public IssueInReleasePredicate(Release release) {
+        this.release = release;
+    }
+
+    /**
+     * Constructor assuming release = null.
+     */
+    public IssueInReleasePredicate() {
+        this(null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean evaluate(Object object) {
+        if (object == null || !(object instanceof Issue)) {
+            return false;
+        }
+        Issue issue = (Issue) object;
+        if (release == null || StringUtils.isEmpty(release.getName())) {
             return StringUtils.isEmpty(issue.getReleaseName());
-		} else {
+        } else {
             return release.getName().equals(issue.getReleaseName());
-		}
-	}
+        }
+    }
 
 }

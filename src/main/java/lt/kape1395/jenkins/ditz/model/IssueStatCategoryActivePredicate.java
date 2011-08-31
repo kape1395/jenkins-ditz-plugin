@@ -28,12 +28,17 @@ import org.apache.commons.collections.Predicate;
  */
 public class IssueStatCategoryActivePredicate implements Predicate {
 
-	public boolean evaluate(Object object) {
-		if (!(object instanceof IssueStatCategory)) {
-			return false;
-		}
-		IssueStats stats = ((IssueStatCategory) object).getIssueStats();
-		return stats.getClosedIssues() != 0 || stats.getNewIssues() != 0 || stats.getOpenIssues() != 0;
-	}
+    /**
+     * Implementation of the predicate.
+     * @param object Object to evaluate.
+     * @return true, if category considered active.
+     */
+    public boolean evaluate(Object object) {
+        if (!(object instanceof IssueStatCategory)) {
+            return false;
+        }
+        IssueStats stats = ((IssueStatCategory) object).getIssueStats();
+        return stats.getClosedIssues() != 0 || stats.getNewIssues() != 0 || stats.getOpenIssues() != 0;
+    }
 
 }
